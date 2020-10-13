@@ -1,0 +1,328 @@
+/* For older browsers */
+header, section, footer, aside, nav, main, article, figure { display: block; }
+
+
+/* Universal */
+body { background-color: #036; font-family: Arial, Helvetica, sans-serif; }
+a:link { color: rgb(50, 60, 205); text-decoration: none; }
+a:hover { color: #93C; text-decoration: underline; }
+input,select { color: #000; text-align: center; font-size: 10px; }
+label { margin-bottom: 0; margin-top: 0;}
+
+
+/* Classes */
+.centered-container { width: 100%; margin: auto; }
+.sndparam-value { text-align: center; }
+.sndparam-header { font-weight: bold; }
+.style5 { color: rgb(0, 0, 0); font-weight: bold; }
+.style7 { color: #FF0; font-size: 10px; }
+.style9 { color: #FFF; font-size: 10px; text-align: center; display: block; }
+.style11 { color:  rgb(0, 0, 0); font-size: 11px;}
+.disabled { font-style: italic; color: #CCC; }
+.plotoption-boxes {
+  border: 2px solid #B8B8B8;
+  border-radius: 20px;
+  background-color: #888;
+  padding: 5px;
+  margin: 25px auto;
+}
+.optionbox {
+  text-align: center;
+}
+
+#svg-container::before {
+  background-image: url(../../includes/imgs/spclogo_trans.png);
+  background-size: 75%;
+  position: absolute;
+  top: 12%;
+  right: 0px;
+  background-repeat: no-repeat;
+  bottom: 12%;
+  left: 12%;
+  opacity: 0.05;
+  content: "";
+}
+
+#line-chart .y-axis-label {
+  /* transform: translate(8rem, 1.3rem); */
+  font-size: 0.8rem;
+}
+
+/* Hack to force desktop safari to show svg axis lines, while keeping
+    other browser svg lines not overly thick */
+@media not all and (min-resolution:.001dpcm) { @media {
+
+  #line-chart line {
+    stroke-width: 1;
+  }
+
+}}
+
+/* SVG Title */
+#svg-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+/* Navigation Bar */
+#mainNav {
+  padding: 0rem 1rem;
+  font-size: 0.8rem;
+}
+
+#chart-container {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  overflow: hidden;
+  display: none;
+  background-color: white;
+  z-index: 200;
+  opacity: 0.97;
+  border-style: solid;
+  border-color: black;
+  border-width: thick;
+}
+
+#hex-build {
+  display: none;
+}
+
+#hexDat {
+  font-size: 0.8rem;
+}
+
+#plotoptions {
+  color: #FFF;
+  font-size: 12px;
+  text-align: center;
+  font-weight: bold;
+  padding: 5px 15px;
+}
+
+#spctext {
+  font-size: 10pt;
+  text-decoration: none;
+  padding: 10px 0;
+}
+
+#plotbutton {
+  background: none;
+  border: none;
+  color: #FFF;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#exp1 { display: block; }
+#plotinfo {
+  color: #FFF;
+  font-size: 12;
+  text-align: center;
+  border-top: solid 2px white;
+  border-bottom: solid 2px white;
+  padding: 5px 0;
+  margin-bottom: 5px;
+}
+
+#movave, #plotsubmit, #dateplot { margin-top: 0px; }
+
+
+/* Main Plot Area */
+/* main { width: 100%; border: 0.1em solid #DDD; height: 1000px;} */
+
+#spclogo {
+  background-image: url(../imgs/spclogo.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 25px auto 0 auto;
+  display: block;
+}
+
+#svg-container {
+  width: 100%;
+}
+
+#map-container {
+  position: fixed;
+  bottom: 10px;
+  width: 70%;
+  left: 15%;
+  display: none;
+  background-color: white;
+  z-index: 201;
+  opacity: 0.9;
+  border-style: solid;
+  border-color: black;
+  border-width: thick;
+}
+
+#mapInfo {
+  float: right;
+  font-size: 0.7rem;
+}
+
+@keyframes example {
+  from {opacity: 0.1;}
+  to {opacity: 0.6;}
+}
+
+.selSite, .selBin {
+  stroke-opacity: 1;
+  animation-name: example;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* The current observation circle */
+path.symbol {
+  animation-name: example;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  visibility: hidden;
+}
+
+#svg-background {
+  background-color: #FFF;
+  box-shadow: 0px 0px 0px 5px #999;
+  border-radius: 2px;
+  width: 100%;
+  margin: 15px 0px;
+}
+
+/* SVG Plot */
+.axis path, .axis line { fill: none; stroke: #000; shape-rendering: crispEdges; }
+.axis path { display: none; }
+.axis line { stroke: #CCC; }
+.line { fill: none; }
+.area { fill: maroon; fill-opacity: 0.2; }
+
+.dropdown-menu {
+  text-align: center;
+}
+
+.obs {
+  stroke: black;
+  stroke-width: 1px;
+  -webkit-animation: blackWhitePulse 1s infinite;
+  -moz-animation: blackWhitePulse 1s infinite;
+  animation: blackWhitePulse 1s infinite;
+}
+
+#loading-page {
+  display: none;
+  z-index: 100;
+  top: 50%;
+}
+
+#min-table, #max-table {
+  font-size: 0.75rem;
+  margin-bottom: 0rem !important;
+}
+
+#table-holder {
+  padding: 0;
+}
+
+#chart-sample {
+  font-size: 0.7rem;
+}
+
+#table-holder th, #table-holder td {
+  padding-right: 0.1rem; 
+  padding-left: 0.1rem;
+}
+
+#min-table thead, #max-table thead, .dc-table-section {
+  display: none;
+}
+
+.datetime {
+  stroke-opacity: 0.8 !important;
+  fill-opacity: 0.8 !important;
+}
+
+#tip {
+  visibility: hidden;
+  position: absolute;
+  background-color: #00000073;
+  color: white;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+}
+
+#right-column {
+  padding-top: 0.5rem;
+}
+
+#min {
+  font-weight: bold;
+  color: #665DF2;
+}
+
+#amin {
+  font-weight: bold;
+  color: #000F8B;
+}
+
+#a10 {
+  font-weight: bold;
+  color: #2AAAAA;
+}
+
+#a25 {
+  font-weight: bold;
+  color: #800001;
+}
+
+#mean {
+  font-weight: bold;
+  color: #333333;
+}
+
+#amed {
+  font-weight: bold;
+  color: #000000;
+}
+
+#a75 {
+  font-weight: bold;
+  color: #800001;
+}
+
+#a90 {
+  font-weight: bold;
+  color: #ce933b;
+}
+
+#amax {
+  font-weight: bold;
+  color: #8B0000;
+}
+
+#max {
+  font-weight: bold;
+  color: #F9182C;
+}
+
+.table-title {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#instruction {
+  font-size: 11px;
+}
+
+/* Used to adjust table size -- bootstrap default padding is too big */
+.table td, .table th {
+  padding: .2rem;
+}
+
+#showinfo {
+  color: white;
+  font-size: 0.7rem;
+}

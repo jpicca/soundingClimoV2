@@ -1,0 +1,434 @@
+{"sites": [
+    {
+        "site": "Fort Worth, TX",
+        "ID": "FWD",
+        "coordinates": [32.834,-97.298],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Norman, OK",
+        "ID": "OUN",
+        "coordinates": [35.182,-97.438],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Shreveport, LA",
+        "ID": "SHV",
+        "coordinates": [32.451768, -93.841744],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Corpus Christi, TX",
+        "ID": "CRP",
+        "coordinates": [27.779319, -97.504968],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Brownsville, TX",
+        "ID": "BRO",
+        "coordinates": [25.916167, -97.419903],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Albuquerque, NM",
+        "ID": "ABQ",
+        "coordinates": [35.038051, -106.622774],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Aberdeen, SD",
+        "ID": "ABR",
+        "coordinates": [45.454483, -98.414183],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Albany, NY",
+        "ID": "ALB",
+        "coordinates": [42.691859, -73.831673],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Amarillo, TX",
+        "ID": "AMA",
+        "coordinates": [35.232549, -101.708726],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Bismarck, ND",
+        "ID": "BIS",
+        "coordinates": [46.771676, -100.761580],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Birmingham, AL",
+        "ID": "BMX",
+        "coordinates": [33.180083, -86.782651],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Blacksburg, VA",
+        "ID": "RNK",
+        "coordinates": [37.203808, -80.414538],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Boise, ID",
+        "ID": "BOI",
+        "coordinates": [43.567736, -116.210918],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Buffalo, NY",
+        "ID": "BUF",
+        "coordinates": [42.941115, -78.720173],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Cape Kennedy, FL",
+        "ID": "XMR",
+        "coordinates": [28.488273, -80.578914],
+        "details": "Currently launched from Cape Canaveral Air Force Station"
+    },
+    {
+        "site": "Caribou, ME",
+        "ID": "CAR",
+        "coordinates": [46.868078, -68.012917],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Chanhassen, MN",
+        "ID": "MPX",
+        "coordinates": [44.848967, -93.564303],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Chatham, MA",
+        "ID": "CHH",
+        "coordinates": [41.656883, -69.958855],
+        "details": "Currently launched from Monomoy National Wildlife Refuge"
+    },
+    {
+        "site": "Charleston, SC",
+        "ID": "CHS",
+        "coordinates": [32.894723, -80.027728],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Dodge City, KS",
+        "ID": "DDC",
+        "coordinates": [37.761625, -99.969341],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Del Rio, TX",
+        "ID": "DRT",
+        "coordinates": [29.374472, -100.918288],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Denver, CO",
+        "ID": "DNR",
+        "coordinates": [39.767470, -104.869482],
+        "details": "Currently launched from former Stapleton Airport site"
+    },
+    {
+        "site": "Detroit, MI",
+        "ID": "DTX",
+        "coordinates": [42.699951, -83.471723],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Davenport, IA",
+        "ID": "DVN",
+        "coordinates": [41.612357, -90.582087],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Elko, NV",
+        "ID": "LKN",
+        "coordinates": [40.860166, -115.741460],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "El Paso, TX",
+        "ID": "ELP",
+        "coordinates": [31.872653, -106.697094],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Flagstaff, AZ",
+        "ID": "FGZ",
+        "coordinates": [35.235188, -111.817429],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Gaylord, MI",
+        "ID": "APX",
+        "coordinates": [44.908253, -84.719385],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Glasgow, MT",
+        "ID": "GGW",
+        "coordinates": [48.206003, -106.626573],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Grand Junction, CO",
+        "ID": "GJT",
+        "coordinates": [39.119705, -108.524290],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Great Falls, MT",
+        "ID": "TFX",
+        "coordinates": [47.460517, -111.385304],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Green Bay, WI",
+        "ID": "GRB",
+        "coordinates": [44.497536, -88.111692],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Greensboro, NC",
+        "ID": "GSO",
+        "coordinates": [36.099653, -79.935810],
+        "details": "Currently launched from Piedmont Triad Airport"
+    },
+    {
+        "site": "Gray, ME",
+        "ID": "GYX",
+        "coordinates": [43.892587, -70.257301],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "International Falls, MN",
+        "ID": "INL",
+        "coordinates": [48.564664, -93.397374],
+        "details": "Currently launched from International Falls Airport"
+    },
+    {
+        "site": "Jackson, MS",
+        "ID": "JAN",
+        "coordinates": [32.319977, -90.080282],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Jacksonville, FL",
+        "ID": "JAX",
+        "coordinates": [30.483307, -81.701080],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Key West, FL",
+        "ID": "KEY",
+        "coordinates": [24.553536, -81.788174],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Lake Charles, LA",
+        "ID": "LCH",
+        "coordinates": [30.125490, -93.217107],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Las Vegas, NV",
+        "ID": "VEF",
+        "coordinates": [36.046800, -115.184651],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Lincoln, IL",
+        "ID": "ILX",
+        "coordinates": [40.151140, -89.337655],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Little Rock, AR",
+        "ID": "LZK",
+        "coordinates": [34.836375, -92.259780],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Medford, OR",
+        "ID": "MFR",
+        "coordinates": [42.376772, -122.881748],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Miami, FL",
+        "ID": "MFL",
+        "coordinates": [25.755463, -80.383542],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Midland, TX",
+        "ID": "MAF",
+        "coordinates": [31.943386, -102.189228],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Nashville, TN",
+        "ID": "BNA",
+        "coordinates": [36.246904, -86.561785],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Newport, NC",
+        "ID": "MHX",
+        "coordinates": [34.775785, -76.877663],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "North Platte, NE",
+        "ID": "LBF",
+        "coordinates": [41.133928, -100.699922],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Oakland, CA",
+        "ID": "OAK",
+        "coordinates": [37.737889, -122.225118],
+        "details": ""
+    },
+    {
+        "site": "Omaha, NE",
+        "ID": "OAX",
+        "coordinates": [41.319496, -96.366345],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Peachtree City, GA",
+        "ID": "FFC",
+        "coordinates": [33.360087, -84.567556],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Pittsburgh, PA",
+        "ID": "PIT",
+        "coordinates": [40.531555, -80.217445],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Quillayute, WA",
+        "ID": "UIL",
+        "coordinates": [47.934533, -124.559744],
+        "details": "Currently launched from Quillayute Airport"
+    },
+    {
+        "site": "Rapid City, SD",
+        "ID": "RAP",
+        "coordinates": [44.072996, -103.210292],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Reno, NV",
+        "ID": "REV",
+        "coordinates": [39.568281, -119.795314],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Salem, OR",
+        "ID": "SLE",
+        "coordinates": [44.909469, -123.009713],
+        "details": "Currently launched from Salem Municipal Airport"
+    },
+    {
+        "site": "Riverton, WY",
+        "ID": "RIW",
+        "coordinates": [43.064805, -108.476664],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Salt Lake City, UT",
+        "ID": "SLC",
+        "coordinates": [40.772533, -111.954975],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "San Diego, CA",
+        "ID": "NKX",
+        "coordinates": [32.873615, -117.136834],
+        "details": "Currently launched from Marine Corps Air Station Miramar"
+    },
+    {
+        "site": "Slidell, LA",
+        "ID": "LIX",
+        "coordinates": [30.337621, -89.825062],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Spokane, WA",
+        "ID": "OTX",
+        "coordinates": [47.681593, -117.626588],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Springfield, MO",
+        "ID": "SGF",
+        "coordinates": [37.235822, -93.402136],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Sterling, VA",
+        "ID": "IAD",
+        "coordinates": [38.973255, -77.488141],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Tallahassee, FL",
+        "ID": "TLH",
+        "coordinates": [30.446053, -84.299397],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Tampa Bay, FL",
+        "ID": "TBW",
+        "coordinates": [27.705286, -82.401263],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Topeka, KS",
+        "ID": "TOP",
+        "coordinates": [39.072969, -95.629845],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Tucson, AZ",
+        "ID": "TUS",
+        "coordinates": [32.227992, -110.956064],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Upton, NY",
+        "ID": "OKX",
+        "coordinates": [40.865171, -72.862946],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Vandenberg, CA",
+        "ID": "VBG",
+        "coordinates": [34.732073, -120.575879],
+        "details": "Currently launched from Vandenberg Air Force Base"
+    },
+    {
+        "site": "Wallops Island, VA",
+        "ID": "WAL",
+        "coordinates": [37.934339, -75.470781],
+        "details": "Currently launched from NASA Wallops Flight Facility"
+    },
+    {
+        "site": "Wilmington, OH",
+        "ID": "ILN",
+        "coordinates": [39.421167, -83.821121],
+        "details": "Currently launched from Weather Forecast Office"
+    },
+    {
+        "site": "Yuma, AZ",
+        "ID": "YUM",
+        "coordinates": [32.988923, -114.222902],
+        "details": "Currently launched from Yuma Proving Ground"
+    }
+]}
