@@ -665,10 +665,6 @@ async function updateData(init=true) {
   // Await the resolution of quantile creation before continuing
   await dm.createDefaultQuantiles();
 
-  // Clear any residual filters from last station
-  //range.filter(null)
-  //timeSeries.filter(null)
-
   // Check if we need to carry over a time filter from a prior visualization
   if (dm.soundTime() != 'all') {
     let time = +$("#soundingtimes input[type='radio']:checked").val().slice(0,2);
@@ -689,6 +685,7 @@ async function updateData(init=true) {
     // Clear any residual filters from last station
     range.filter(null)
     timeSeries.filter(null)
+    hist.filter(null)
 
     dm.updateTSGroup();
 
@@ -724,17 +721,15 @@ async function updateData(init=true) {
 // An async function to simply update charts (not load new data) when time or plot options are changed
 async function refreshChart(type) {
 
+  let rangeFilt = range.filter();
+  let histFilt = hist.filter();
+
   // Decrease opacity of plots while new data is processing
   loadingFormat();
 
   switch (type) {
     case 'time' :
       let newTime = +$("#soundingtimes input[type='radio']:checked").val().slice(0,2)
-
-      // Get any current filter from range chart
-      let filter = range.filter();
-
-      // console.log(filter)
       
       // Clear the filter from the range and time series charts to start fresh
       range.filter(null);
@@ -750,11 +745,17 @@ async function refreshChart(type) {
         // Clear the time filters
         dm.getUserDim().filter();
 
+        // Clear any hist filters
+        hist.filter(null);
+
         // Update time series chart with original, unfiltered dimension / group
         dm.updateTSGroup();
 
         // Re-apply filter to range chart
-        range.filter(filter)
+        range.filter(rangeFilt);
+
+        // Re-apply filter to hist chart
+        hist.filter(histFilt);
 
         // Redraw charts again
         dc.redrawAll();
@@ -769,14 +770,17 @@ async function refreshChart(type) {
         // Filter for the proper hour
         dm.getUserDim().filter(d => { return d.getHours() == newTime });
         
-        // Redraw all charts (except time series... sort of)
-        // dc.redrawAll();
+        // Clear any hist filters
+        hist.filter(null);
 
         // Time series has to use a special function that utilizes temp crossfilters/dimensions
         dm.updateTSGroup();
 
         // Re-apply filter to range chart
-        range.filter(filter)
+        range.filter(rangeFilt)
+
+        // Re-apply filter to hist chart
+        hist.filter(histFilt);
 
         // Redraw charts again
         dc.redrawAll();
@@ -794,8 +798,18 @@ async function refreshChart(type) {
       break;
     case 'yaxis':
 
+      // histFilt = hist.filter();
+      timeSeries.filter(null);
+
+      // Clear any filters
+      hist.filter(null);
+      range.filter(null);
+
       // Logic in make chart will check the yaxis values entered
       dm.updateTSGroup();
+
+      hist.filter(histFilt);
+      range.filter(rangeFilt);
 
       break;
   }
