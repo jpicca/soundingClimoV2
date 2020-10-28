@@ -444,7 +444,7 @@
                 <label class="style5" for="stn">Select Station</label>
                 <br />
                 <select id="stn">
-                  <option value="ABQ">Albuquerque, NM</option>
+                  <option value="ABQ" selected="selected">Albuquerque, NM</option>
                   <option value="ABR">Aberdeen, SD</option>
                   <option value="ALB">Albany, NY</option>
                   <option value="AMA">Amarillo, TX</option>
@@ -489,7 +489,7 @@
                   <option value="MAF">Midland, TX</option>
                   <option value="BNA">Nashville, TN</option>
                   <option value="MHX">Newport, NC</option>
-                  <option value="OUN" selected="selected">Norman, OK</option>
+                  <option value="OUN">Norman, OK</option>
                   <option value="LBF">North Platte, NE</option>
                   <option value="OAK">Oakland, CA</option>
                   <option value="OAX">Omaha, NE</option>
@@ -625,6 +625,14 @@
         
                   <!-- Values are negative... not sure if they're relative to something else or what -->
                   <option value="MELTINGLVL" unit="ft" disabled>Melting Level (ft)</option>
+
+                  <option value="PASS">---Mixing Height---</option>
+                  <option value="MIX_SFC" unit="m" class="mix">Mixing Height / Stull Sfc (m)</option>
+                  <option value="MIX_SFC_1K" unit="m" class="mix">Mixing Height / Stull Sfc + 1 K (m)</option>
+                  <option value="MIX_500M" unit="m" class="mix">Mixing Height / Stull 500m (m)</option>
+                  <option value="MIX_SFC_PRES" unit="m" class="mix">Mixing Height / Stull Sfc (hPa)</option>
+                  <option value="MIX_SFC_1K_PRES" unit="m" class="mix">Mixing Height / Stull Sfc + 1 K (hPa)</option>
+                  <option value="MIX_500M_PRES" unit="m" class="mix">Mixing Height / Stull 500m (hPa)</option>
                 </select>
               </div>
             </li>

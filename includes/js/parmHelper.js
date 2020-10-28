@@ -264,5 +264,29 @@ var parmParm = {
     'Wet Bulb Zero Height (ft)': {
         bin: 200,
         dec: 0
+    },
+    'Mixing Height / Stull Sfc (m)': {
+        bin: 400,
+        dec: 0
+    },
+    'Mixing Height / Stull Sfc + 1 K (m)': {
+        bin: 400,
+        dec: 0
+    },
+    'Mixing Height / Stull 500m (m)': {
+        bin: 400,
+        dec: 0
+    },
+    'Mixing Height / Stull Sfc (hPa)': {
+        bin: 40,
+        dec: 0
+    },
+    'Mixing Height / Stull Sfc + 1 K (hPa)': {
+        bin: 40,
+        dec: 0
+    },
+    'Mixing Height / Stull 500m (hPa)': {
+        bin: 40,
+        dec: 0
     }
 }

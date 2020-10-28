@@ -46,15 +46,29 @@ $("#raw-vs-filter input[type='radio']").on("change", function() {
 $("#sndparam").on("change", function() {
 
   let parm = $('#sndparam option:selected').val().toLowerCase();
-  let canFilter = $.inArray(parm,dm.get0List())
+  let mixingParm = $.inArray(parm,dm.get0List())
 
-  // Only enable the 0 filter checkbox if it's filterable parm
-  // and make sure box is unchecked if it's not filterable
-  if (canFilter == -1) {
-    $('#filter0').prop('checked',false);
-    $('#filter0').attr('disabled',true);
+  // Only have mixing parms for 00Z so need to properly set time / process data
+  if (mixingParm == -1) {
+
+    $('input[name="sndtime"]').attr('disabled',false);
+    $('input[name="dtype"]').attr('disabled',false);
+
+    //$('#filter0').prop('checked',false);
+    //$('#filter0').attr('disabled',true);
   } else {
-    $('#filter0').attr('disabled',false);
+
+    $('#zero').prop('checked',true);
+    $('#twelve').attr('disabled',true);
+    $('#both').attr('disabled',true);
+
+    $('#filtered').prop('checked',true);
+    $('#raw').attr('disabled',true);
+
+    // Clear any locked/highlighted data
+    clearLock();
+    updateSoundTime();
+
   }
 
   // Clear the y-axis input boxes

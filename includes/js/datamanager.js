@@ -11,7 +11,9 @@ d3Edge.dataManager = function module() {
       // Variables for current ob "scatterplot"
       scatDim, scatGroup;
 
-  var filter0Fields = ['sbcape','mlcape', 'mucape', 'mlcape03', 'dcape'];
+  //var filter0Fields = ['sbcape','mlcape', 'mucape', 'mlcape03', 'dcape'];
+  var filter0Fields = ['mix_sfc','mix_sfc_1k','mix_500m','mix_sfc_pres','mix_sfc_1k_pres',
+                      'mix_500m_pres']
 
   exports.filteredFiles = function(val) {
     if (!arguments.length) return filtered;
@@ -132,8 +134,6 @@ d3Edge.dataManager = function module() {
 
     // Use a promise that resolves once data are loaded
     return new Promise((resolve,reject) => {
-
-      //console.log(`readData processing with: ${_file}`)
       
       fdata = crossfilter();
 
@@ -200,7 +200,7 @@ d3Edge.dataManager = function module() {
         _tvals = raw_data.filter(d => { return dateToDay(d.date) == i })
 
         // *** May be able to make more efficient with another filter, versus looping / pushing ***
-        _tvals.forEach(function(p) { if (p.val >  -999.) {tvals.push(p.val); }; });
+        _tvals.forEach(function(p) { if (p.val >  -9999.) {tvals.push(p.val); }; });
         
         // Introduce user-variable filtering
         if ($('#filterMin').val()) { tvals = tvals.filter(d => { return d > $('#filterMin').val() })}
@@ -339,6 +339,7 @@ d3Edge.dataManager = function module() {
   exports.formatObs = function () {
 
     let curObsObj = exports.getObs();
+
     let keys = Object.keys(curObsObj);
 
     let obs00 = curObsObj[keys[1]]
@@ -349,6 +350,11 @@ d3Edge.dataManager = function module() {
     try {
 
       let date00 = dateFromDay(2008,dateToDay(parseDate(keys[1])))
+
+      if (!obs00[soundParm]) {
+        throw "No observation for 00z"
+      }
+
       scatXF.add([{'date':date00,'val':obs00[soundParm]}])
 
     } catch (err) {
@@ -357,6 +363,11 @@ d3Edge.dataManager = function module() {
 
     try {
       let date12 = dateFromDay(2008,dateToDay(parseDate(keys[2])))
+
+      if (!obs12[soundParm]) {
+        throw "No observation for 12z"
+      }
+
       scatXF.add([{'date':date12,'val':obs12[soundParm]}])
     } catch (err) {
       console.log('No observation for 12z')

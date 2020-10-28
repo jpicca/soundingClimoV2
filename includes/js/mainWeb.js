@@ -180,6 +180,10 @@ class bChart {
 
   makeChart(dcChart,dim,group) {
 
+    let minVal = dm.getbarDim().bottom(1)[0].val
+    let maxVal = dm.getbarDim().top(1)[0].val
+    let rangeVal = maxVal - minVal;
+
     dcChart.width(this.width)
         .height(0.3*height)
         .margins(margin)
@@ -196,6 +200,14 @@ class bChart {
         .tickFormat(d3.format("~s"));
 
         dcChart.yAxis().ticks(8);
+
+        if (rangeVal > 1000) {
+          dcChart.xAxis().tickFormat(d3.format("~s"));
+        } else {
+          dcChart.xAxis()
+              .tickFormat(d3.format(""))
+        }
+
         dcChart.render();
 
   }
