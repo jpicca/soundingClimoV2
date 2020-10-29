@@ -28,7 +28,7 @@ class tsChart {
     return this;
   }
 
-  makeChart(dcChart,dim,group) {
+  makeChart(dcChart,dim,group,flip=false) {
 
     // dcjs's elastic y sets the min at 0 if there are no negative values
     // This causes too large of a y domain if all the values are much higher
@@ -58,6 +58,14 @@ class tsChart {
     if ($('#ymin').val()) { min = +$('#ymin').val() }
     if ($('#ymax').val()) { max = +$('#ymax').val() }
 
+    // Create array for domain
+    let domainArr;
+    if (flip) { 
+      domainArr = [max,min]
+    } else {
+      domainArr = [min,max]
+    }
+
     dcChart.width(this.width)
       .height(height*0.65)
       .x(d3.scaleTime()
@@ -68,7 +76,15 @@ class tsChart {
       .yAxisLabel($('#sndparam option:selected').text())
       .elasticY(false)
       .y(d3.scaleLinear()
-          .domain([min,max]))
+          .domain(domainArr))
+          // .domain(() => {
+          //   if (flip) {
+          //     return [max,min]
+          //   } else {
+          //     return [min,max]
+          //   }
+          // }))
+            //(flip) => {if(flip) { return [max,min] } else { return [min,max] }}))
       .rangeChart(range)
       .brushOn(false)
       .title(d => {return d3.timeFormat('%b %d')(d.key)})

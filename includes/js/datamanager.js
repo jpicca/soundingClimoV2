@@ -427,8 +427,14 @@ d3Edge.dataManager = function module() {
          p25: 0, p50: 0, mean: 0, p75: 0, p90: 0, p99: 0, p100: 0})
     )
 
+    // Check if we're dealing with a pressure y-axis
+    let flip = false;
+    if (filter0Fields.slice(3).includes(soundParm)) {
+      flip = true;
+    }
+
     // Re-create the chart once we have our new dimension and group
-    chart.makeChart(timeSeries,tempDim,newGroup);
+    chart.makeChart(timeSeries,tempDim,newGroup,flip=flip);
 
     // Make sure we keep the time series plot consistent with the moveave checkbox
     if ($("#dateplot").prop("checked")) {
