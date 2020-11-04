@@ -671,14 +671,14 @@ function updateSoundParm() { dm.soundParm($('#sndparam option:selected').val().t
 function updateSoundParmUnit() { dm.soundParmUnit($('#sndparam option:selected').attr('unit')); };
 
 // Need to return a resolved promise for async jq call functions
-function updateQuantiles() {
-  return new Promise((resolve,reject) => {
+// function updateQuantiles() {
+//   return new Promise((resolve,reject) => {
 
-    dm.createDefaultQuantiles();
+//     dm.createDefaultQuantiles();
 
-    resolve();
-  })
-}
+//     resolve();
+//   })
+// }
 
 // Update the data in the DataManager in async fashion
 async function updateData(init=true) {

@@ -1,7 +1,17 @@
 // Change station via menu
 $("#stn").on("change", stationChange);
 
-function stationChange() {
+function stationChange() { 
+
+  let station = $('#stn').val();
+
+  if (noMixSites.includes(station)) {
+    // Disable mixing height options
+    $('.mix').prop('disabled',true);
+  } else {
+    // Enable mixing height options
+    $('.mix').prop('disabled',false);
+  }
 
   // Clear any locked/highlighted data
   clearLock();
@@ -42,8 +52,7 @@ $("#raw-vs-filter input[type='radio']").on("change", function() {
   updateData(false);
 });
 
-// Change Parameter
-$("#sndparam").on("change", function() {
+function parmChange() {
 
   let parm = $('#sndparam option:selected').val().toLowerCase();
   let mixingParm = $.inArray(parm,dm.get0List())
@@ -54,8 +63,8 @@ $("#sndparam").on("change", function() {
     $('input[name="sndtime"]').attr('disabled',false);
     $('input[name="dtype"]').attr('disabled',false);
 
-    //$('#filter0').prop('checked',false);
-    //$('#filter0').attr('disabled',true);
+    $('.no-mix').prop('disabled',false);
+
   } else {
 
     $('#zero').prop('checked',true);
@@ -65,11 +74,13 @@ $("#sndparam").on("change", function() {
     $('#filtered').prop('checked',true);
     $('#raw').attr('disabled',true);
 
-    // Clear any locked/highlighted data
-    clearLock();
-    updateSoundTime();
+    $('.no-mix').prop('disabled',true);
 
   }
+
+  // Clear any locked/highlighted data
+  // clearLock();
+  updateSoundTime();
 
   // Clear the y-axis input boxes
   $('#ymax').val('')
@@ -90,7 +101,11 @@ $("#sndparam").on("change", function() {
     updateSoundParmUnit();
     updateData(false);
   };
-});
+
+}
+
+// Change Parameter
+$("#sndparam").on("change", parmChange);
 
 // Change in yaxis values
 $("#ymax, #ymin").on("change", function() {

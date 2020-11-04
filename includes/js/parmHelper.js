@@ -1,4 +1,5 @@
-// Use this file to adjust bin spacing for bar chart
+// Use this file for random helper variables
+var noMixSites = ['TLH','YUM']
 
 var parmParm = {
     'Precipitable Water (inches)': {
@@ -266,27 +267,27 @@ var parmParm = {
         dec: 0
     },
     'Mixing Height / Stull Sfc (m)': {
-        bin: 400,
+        bin: 250,
         dec: 0
     },
     'Mixing Height / Stull Sfc + 1 K (m)': {
-        bin: 400,
+        bin: 250,
         dec: 0
     },
     'Mixing Height / Stull 500m (m)': {
-        bin: 400,
+        bin: 250,
         dec: 0
     },
     'Mixing Height / Stull Sfc (hPa)': {
-        bin: 40,
+        bin: 25,
         dec: 0
     },
     'Mixing Height / Stull Sfc + 1 K (hPa)': {
-        bin: 40,
+        bin: 25,
         dec: 0
     },
     'Mixing Height / Stull 500m (hPa)': {
-        bin: 40,
+        bin: 25,
         dec: 0
     }
 }

@@ -124,7 +124,10 @@ d3Edge.dataManager = function module() {
 
         resolve();
 
-      }).catch(err => { console.log(err) });
+      }).catch(err => { 
+        console.log(err) 
+        resolve();
+      });
 
     })
 
@@ -169,6 +172,13 @@ d3Edge.dataManager = function module() {
         // Resolve promise once d3.csv has data processed
         resolve();
 
+      //}).catch(err => { 
+      }).catch(function(err) {
+        alert('No data exist for this station/parameter combo!')
+
+        //exports.readData(exports.fileName());
+
+        resolve();
       });
 
     })
@@ -209,7 +219,15 @@ d3Edge.dataManager = function module() {
         // When we filter 0s, if there are no values remaining, it will end up pushing "undefined"
         // into the quantile calc. This will break the time series plotting. Soo just tossing in a 0
         // to fix this problem for the time being.
-        if (!tvals.length) { tvals.push(0) }
+
+        // **11/4/20 update -- adjusted logic to add 1000 (instead of 0) for parms in pressure units
+        if (!tvals.length) { 
+          if ($('#sndparam :selected').prop('class') == 'mix pres') {
+            tvals.push(1000) 
+          } else {
+            tvals.push(0)
+          }
+        }
 
         // Sort the values to prep for quantile calc
         tvals = tvals.sort(function(a,b) { return a-b; });

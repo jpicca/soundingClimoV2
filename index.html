@@ -444,7 +444,7 @@
                 <label class="style5" for="stn">Select Station</label>
                 <br />
                 <select id="stn">
-                  <option value="ABQ" selected="selected">Albuquerque, NM</option>
+                  <option value="ABQ">Albuquerque, NM</option>
                   <option value="ABR">Aberdeen, SD</option>
                   <option value="ALB">Albany, NY</option>
                   <option value="AMA">Amarillo, TX</option>
@@ -489,7 +489,7 @@
                   <option value="MAF">Midland, TX</option>
                   <option value="BNA">Nashville, TN</option>
                   <option value="MHX">Newport, NC</option>
-                  <option value="OUN">Norman, OK</option>
+                  <option value="OUN" selected="selected">Norman, OK</option>
                   <option value="LBF">North Platte, NE</option>
                   <option value="OAK">Oakland, CA</option>
                   <option value="OAX">Omaha, NE</option>
@@ -507,7 +507,7 @@
                   <option value="OTX">Spokane, WA</option>
                   <option value="SGF">Springfield, MO</option>
                   <option value="IAD">Sterling, VA</option>
-                  <option value="TLH">Tallahassee, FL</option>
+                  <option value="TLH" class="no-mix">Tallahassee, FL</option>
                   <option value="TBW">Tampa Bay, FL</option>
                   <option value="TOP">Topeka, KS</option>
                   <option value="TUS">Tucson, AZ</option>
@@ -515,7 +515,7 @@
                   <option value="VBG">Vandenberg, CA</option>
                   <option value="WAL">Wallops Island, VA</option>
                   <option value="ILN">Wilmington, OH</option>
-                  <option value="YUM">Yuma, AZ</option>
+                  <option value="YUM" class="no-mix">Yuma, AZ</option>
                 </select>
               </div>
             </li>
@@ -630,9 +630,9 @@
                   <option value="MIX_SFC" unit="m" class="mix">Mixing Height / Stull Sfc (m)</option>
                   <option value="MIX_SFC_1K" unit="m" class="mix">Mixing Height / Stull Sfc + 1 K (m)</option>
                   <option value="MIX_500M" unit="m" class="mix">Mixing Height / Stull 500m (m)</option>
-                  <option value="MIX_SFC_PRES" unit="m" class="mix">Mixing Height / Stull Sfc (hPa)</option>
-                  <option value="MIX_SFC_1K_PRES" unit="m" class="mix">Mixing Height / Stull Sfc + 1 K (hPa)</option>
-                  <option value="MIX_500M_PRES" unit="m" class="mix">Mixing Height / Stull 500m (hPa)</option>
+                  <option value="MIX_SFC_PRES" unit="m" class="mix pres">Mixing Height / Stull Sfc (hPa)</option>
+                  <option value="MIX_SFC_1K_PRES" unit="m" class="mix pres">Mixing Height / Stull Sfc + 1 K (hPa)</option>
+                  <option value="MIX_500M_PRES" unit="m" class="mix pres">Mixing Height / Stull 500m (hPa)</option>
                 </select>
               </div>
             </li>
@@ -648,7 +648,7 @@
             </li>
             <li class="nav-item py-1 px-lg-3"> 
               <div style='text-align: center;'>
-                <button id='obsBtn' class='btn btn-sm btn-link'>Toggle Current Ob</button>
+                <!-- <button id='obsBtn' class='btn btn-sm btn-link'>Toggle Current Ob</button> -->
               </div>
             </li>
             <li class="nav-item px-lg-3 my-auto">
