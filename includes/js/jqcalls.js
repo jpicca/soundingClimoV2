@@ -28,6 +28,20 @@ function stationChange() {
 
   updateHex(hexchart);
 
+  updatePOR();
+
+}
+
+$("#n_vals").on("change", maxMinVal);
+
+function maxMinVal() {
+  // console.log(+$('#n_vals').val())
+
+  if (isNaN(+$('#n_vals').val())) { +$('#n_vals').val(5) }
+
+  // Update tables
+  maxTab.size(+$('#n_vals').val()).redraw()
+  minTab.size(+$('#n_vals').val()).redraw()
 }
 
 // On Time Change

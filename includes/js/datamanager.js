@@ -150,11 +150,11 @@ d3Edge.dataManager = function module() {
           d.date = parseDate(d.date);
 
           // Coerce 03Z to 00Z and 15Z to 12Z
-          if (d.date.getHours() == 3) {
-            d.date.setHours(0)
-          } else if (d.date.getHours() == 15) {
-            d.date.setHours(12)
-          }
+          // if (d.date.getHours() == 3) {
+          //   d.date.setHours(0)
+          // } else if (d.date.getHours() == 15) {
+          //   d.date.setHours(12)
+          // }
 
           d.val = +d.val;
 

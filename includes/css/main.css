@@ -88,6 +88,11 @@ label { margin-bottom: 0; margin-top: 0;}
   display: none;
 }
 
+#hex-drop-list {
+  margin-left: 3rem;
+  font-size: 0.75rem;
+}
+
 #hexDat {
   font-size: 0.8rem;
 }
@@ -313,7 +318,7 @@ path.symbol {
   font-weight: bold;
 }
 
-#instruction {
+#instruction, #nval-inst {
   font-size: 11px;
 }
 

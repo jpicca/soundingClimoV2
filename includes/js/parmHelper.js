@@ -214,6 +214,10 @@ var parmParm = {
         bin: 50,
         dec: 0
     },
+    'Effective SRH (m^2/s^2)': {
+        bin: 50,
+        dec: 0
+    },
     'Surface Wind Speed (U component; kt)': {
         bin: 2,
         dec: 0
@@ -258,6 +262,14 @@ var parmParm = {
         bin: 0.2,
         dec: 1
     },
+    'Effective-Layer Sig-Tornado Parameter': {
+        bin: 0.2,
+        dec: 1
+    },
+    'Effective-Layer SCP': {
+        bin: 0.5,
+        dec: 1
+    },
     'Significant Hail Parameter': {
         bin: 0.2,
         dec: 1
@@ -288,6 +300,10 @@ var parmParm = {
     },
     'Mixing Height / Stull 500m (hPa)': {
         bin: 25,
+        dec: 0
+    },
+    'Melting Level (ft)': {
+        bin: 200,
         dec: 0
     }
 }

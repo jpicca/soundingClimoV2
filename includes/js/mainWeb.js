@@ -77,17 +77,15 @@ class tsChart {
       .elasticY(false)
       .y(d3.scaleLinear()
           .domain(domainArr))
-          // .domain(() => {
-          //   if (flip) {
-          //     return [max,min]
-          //   } else {
-          //     return [min,max]
-          //   }
-          // }))
-            //(flip) => {if(flip) { return [max,min] } else { return [min,max] }}))
       .rangeChart(range)
       .brushOn(false)
-      .title(d => {return d3.timeFormat('%b %d')(d.key)})
+      .title(d => {
+        let text = d3.timeFormat('%b %d (%HZ)')(d.key);
+        if (text == ' NaN (NaNZ)') { 
+          text = `${d.key[1]}${dm.getUnit()}` 
+        } 
+        return text;
+      })
       .compose([
         new dc.LineChart(dcChart)
             .dimension(dim)
@@ -123,7 +121,7 @@ class tsChart {
         new dc.ScatterPlot(dcChart)
             .dimension(dm.getScatDim())
             .group(dm.getScatGroup())
-            .symbolSize(15)
+            .symbolSize(20)
             .ordinalColors(['black'])
       ])
       // Use the highlighting function to bind data updating on render/re-draws
@@ -306,7 +304,8 @@ class tabChart {
 
     dcChart.width(this.width)
         .dimension(dim)
-        .size(5)
+        //.size(5)
+        .size(+$('#n_vals').val())
         .order(ordering)
         .columns([
           //'date',
@@ -570,7 +569,7 @@ class hexChart {
         this.hexbins = d3.hexbin()
                     .x(d => this.x(d.val1))
                     .y(d => this.y(d.val))
-                    .radius(8)
+                    .radius(+$('#bin-size').val())
                     .extent([[this.margin.left, this.margin.top], 
                         [this.width - this.margin.right, this.height - this.margin.bottom]])
 
@@ -669,16 +668,6 @@ function updateSmoothPeriod() {
 // Update the DataManager Sounding Parameter
 function updateSoundParm() { dm.soundParm($('#sndparam option:selected').val().toLowerCase()); };
 function updateSoundParmUnit() { dm.soundParmUnit($('#sndparam option:selected').attr('unit')); };
-
-// Need to return a resolved promise for async jq call functions
-// function updateQuantiles() {
-//   return new Promise((resolve,reject) => {
-
-//     dm.createDefaultQuantiles();
-
-//     resolve();
-//   })
-// }
 
 // Update the data in the DataManager in async fashion
 async function updateData(init=true) {
@@ -867,6 +856,13 @@ async function updateHex(chart) {
   $('#hex-build').hide()
 }
 
+function updatePOR() {
+
+  let station = dm.station();
+  d3.select('#por-text').html(por[station])
+
+}
+
 $(window).ready(function() {
 
   dm = d3Edge.dataManager();
@@ -893,5 +889,7 @@ $(window).ready(function() {
   // Instantiate a hexchart object and run first chart update behind the scenes
   hexchart = new hexChart();
   updateHex(hexchart);
+
+  updatePOR();
 
 })
