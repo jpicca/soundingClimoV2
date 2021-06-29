@@ -637,21 +637,47 @@ class hexChart {
         // Wait on the proper obs
         await dm.readObs();
         let curObsObj = dm.getObs();
+        let obs00, obs12;
+        let hex_obs = [];
 
         let keys = Object.keys(curObsObj);
-
-        let obs00 = curObsObj[keys[1]]
-        let obs12 = curObsObj[keys[2]]
+          
+        keys.forEach(key => {
+          if (key.slice(7,) == '0000') {
+            obs00 = curObsObj[key]
+          } else if (key.slice(7,) == '1200') {
+            obs12 = curObsObj[key]
+          }
+        })
 
         let xparm = document.getElementById('chrtXparam').value.toLowerCase()
         let yparm = document.getElementById('chrtYparam').value.toLowerCase()
+        
+        try {
+          let xval_00 = obs00[xparm]
+          let yval_00 = obs00[yparm]
 
-        let xval_00 = obs00[xparm]
-        let yval_00 = obs00[yparm]
-        let xval_12 = obs12[xparm]
-        let yval_12 = obs12[yparm]
+          if (xval_00 && yval_00) {
+            hex_obs.push({x: xval_00,y: yval_00,t: '00z'})
+          }
 
-        let hex_obs = [{x: xval_00,y: yval_00,t: '00z'}, {x: xval_12, y: yval_12, t: '12z'}]
+        } catch (err) {
+          console.log('00z ob is missing for hexbin plotting')
+        }
+
+        try {
+          let xval_12 = obs12[xparm]
+          let yval_12 = obs12[yparm]
+
+          if (xval_12 && yval_12) {
+            hex_obs.push({x: xval_12,y: yval_12,t: '12z'})
+          }
+        
+        } catch (err) {
+          console.log('12z ob is missing for hexbin plotting')
+        }
+
+        // hex_obs = [{x: xval_00,y: yval_00,t: '00z'}, {x: xval_12, y: yval_12, t: '12z'}]
         
         hexArea.selectAll("circle")
             .data(hex_obs)

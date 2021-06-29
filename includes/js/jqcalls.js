@@ -252,12 +252,16 @@ $('#hexobsBtn').on("click", () => {
 
   let circles = d3.selectAll('.hexOb');
 
-  if (circles.style('visibility') == 'visible') {
-    circles.style('visibility', 'hidden')
+  if (circles.empty()) {
+    alert('No current data available to plot for this station/parameter combination.')
   } else {
-    circles.style('visibility', 'visible')
-  }
 
+    if (circles.style('visibility') == 'visible') {
+      circles.style('visibility', 'hidden')
+    } else {
+      circles.style('visibility', 'visible')
+    }
+  }
 })
 
 $('#obsBtn').on("click", () => {
