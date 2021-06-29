@@ -248,6 +248,18 @@ $('#chartBtn').on("click", () => {
     
 });
 
+$('#hexobsBtn').on("click", () => {
+
+  let circles = d3.selectAll('.hexOb');
+
+  if (circles.style('visibility') == 'visible') {
+    circles.style('visibility', 'hidden')
+  } else {
+    circles.style('visibility', 'visible')
+  }
+
+})
+
 $('#obsBtn').on("click", () => {
 
   // Which observation to make visible

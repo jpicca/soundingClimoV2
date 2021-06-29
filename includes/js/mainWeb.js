@@ -387,6 +387,7 @@ function highlighting() {
       let instruct = d3.select('#instruction')
         
       instruct.html('<a href="#">&nbsp; Unlock Data</a>')
+      instruct.classed('locked',true);
 
       // Clear the data lock but prevent the click from scrolling to the top of the page
 
@@ -401,6 +402,7 @@ function clearLock() {
   let instruct = d3.select('#instruction')
 
   instruct.html('&nbsp; (Click sampled date to lock data)')
+  instruct.classed('locked',false)
 
   d3.selectAll('.datetime')
     .classed('datetime',false)
@@ -579,7 +581,7 @@ class hexChart {
 
     }
 
-    makePlot() {
+    async makePlot() {
 
         $('#hexLabel').html(`<b>All ${hexParm.station.toUpperCase()}</b> (Filtered)`)
 
@@ -591,8 +593,9 @@ class hexChart {
                     .attr("width", this.width)
                     .attr("height", this.height);
 
-        svg.append("g")
-            .attr("stroke", "#000")
+        let hexArea = svg.append("g");
+
+        hexArea.attr("stroke", "#000")
             .attr("stroke-opacity", 0.1)
             .selectAll("path")
             .data(this.bins)
@@ -629,6 +632,48 @@ class hexChart {
 
 
             });
+
+        // Add current observation points
+        // Wait on the proper obs
+        await dm.readObs();
+        let curObsObj = dm.getObs();
+
+        let keys = Object.keys(curObsObj);
+
+        let obs00 = curObsObj[keys[1]]
+        let obs12 = curObsObj[keys[2]]
+
+        let xparm = document.getElementById('chrtXparam').value.toLowerCase()
+        let yparm = document.getElementById('chrtYparam').value.toLowerCase()
+
+        let xval_00 = obs00[xparm]
+        let yval_00 = obs00[yparm]
+        let xval_12 = obs12[xparm]
+        let yval_12 = obs12[yparm]
+
+        let hex_obs = [{x: xval_00,y: yval_00,t: '00z'}, {x: xval_12, y: yval_12, t: '12z'}]
+        
+        hexArea.selectAll("circle")
+            .data(hex_obs)
+            .join("circle")
+            .attr("stroke","black")
+            .attr("stroke-width", 0.5)
+            .attr("fill","white")
+            .attr("cx",d => this.x(d.x))
+            .attr("cy",d => this.y(d.y))
+            .attr("r", 10)
+            .classed('hexOb', true)
+
+        hexArea.selectAll(".obText")
+            .data(hex_obs)
+            .join("text")
+            .text(d => d.t)
+            .attr("x",d => this.x(d.x))
+            .attr("y",d => this.y(d.y) + 4) // Add half of the font size
+            .classed('obText',true)
+            .classed('hexOb', true)
+            .attr('text-anchor','middle')
+            .attr('font-size','8px')
 
         svg.append("g")
             .call(this.xAxis);

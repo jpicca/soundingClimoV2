@@ -300,6 +300,12 @@
                 <input type="number" name="bin-size" id="bin-size" size="3" value="8"/>
               </div>
               <hr>
+              <div class='dropdown-item'>
+                <button class="btn btn-secondary btn-sm" id='hexobsBtn' type="button">
+                  <span>Toggle Latest Obs</span>
+                </button>
+              </div>
+              <hr>
               <div class="dropdown-item">
                 <div>Filter Days Before</div>
 
@@ -656,7 +662,7 @@
             </li>
             <li class="nav-item py-1 px-lg-3"> 
               <div style='text-align: center;'>
-                <button id='obsBtn' class='btn btn-sm btn-link'>Toggle Current Ob</button>
+                <button id='obsBtn' class='btn btn-sm btn-link'>Plot Current Ob</button>
               </div>
             </li>
             <li class="nav-item px-lg-3 my-auto">
@@ -770,7 +776,10 @@
                     </tr>
                   </tbody>
                 </table>
-
+                <div id='currentOb'>
+                  <div id="current00"></div>
+                  <div id="current12"></div>
+                </div>
                 </div>
               </div>
               <hr />
