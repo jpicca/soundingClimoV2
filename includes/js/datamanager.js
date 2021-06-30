@@ -11,7 +11,6 @@ d3Edge.dataManager = function module() {
       // Variables for current ob "scatterplot"
       scatDim, scatGroup;
 
-  //var filter0Fields = ['sbcape','mlcape', 'mucape', 'mlcape03', 'dcape'];
   var filter0Fields = ['mix_sfc','mix_sfc_1k','mix_500m','mix_sfc_pres','mix_sfc_1k_pres',
                       'mix_500m_pres']
 
@@ -51,13 +50,12 @@ d3Edge.dataManager = function module() {
 
   exports.fileName = function(stn, sndparm, filtered) {
     if (!arguments.length) return fileName;
-    if (filtered) {
+    if (filtered || (filter0Fields.includes(sndparm))) {
       fileName = "./datafiles/" + stn + "/" + stn + "-" + sndparm + "-filtered.csv";
     } else {
       fileName = "./datafiles/" + stn + "/" + stn + "-" + sndparm + ".csv";
     }
-
-    //console.log(`Filename: ${fileName}`)
+    
     return this;
   };
 

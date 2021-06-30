@@ -79,7 +79,7 @@
               <div class="dropdown-item" id="Xselect">
                 <label class="style5" for="chrtXparam">X: </label>
                 <select class='wide-select' id="chrtXparam">
-                  <option value="PASS">---Mandatory Level Data---</option>
+                  <option value="PASS" disabled>---Mandatory Level Data---</option>
                   <option value="TEMP925" unit="C">925 mb Temperature (C)</option>
                   <option value="DEWPOINT925" unit="C">925 mb Dewpoint (C)</option>
                   <option value="MIXRATIO925" unit="g/kg">925 mb Mixing Ratio (g/kg)</option>
@@ -105,7 +105,7 @@
                   <option value="HEIGHT250" unit="m">250 mb Height (m)</option>
                   <option value="TEMP250" unit="C">250 mb Temperature (C)</option>
                   <option value="WINDSPD250" unit="kt">250 mb Wind Speed (kt)</option>
-                  <option value="PASS">---Instability Parameters---</option>
+                  <option value="PASS" disabled>---Instability Parameters---</option>
                   <option value="MLCAPE" unit="J/kg">Mixed Layer CAPE (J/kg)</option>
                   
                   <!-- Bad data exist in ML CIN... values are positive/too large -->
@@ -139,7 +139,7 @@
                   <option value="LAPSERATE85" unit="C/km">850-500 mb Lapse Rate (C/km)</option>
                   <option value="LAPSERATE36" unit="C/km">3-6 km AGL Lapse Rate (C/km)</option>
                   <option value="LAPSERATE03" unit="C/km">0-3 km AGL Lapse Rate (C/km)</option>
-                  <option value="PASS">---Kinematic Parameters---</option>
+                  <option value="PASS" disabled>---Kinematic Parameters---</option>
                   <option value="SHEAR06" unit="kt">0-6 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR03" unit="kt">0-3 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR01" unit="kt">0-1 km AGL Bulk Wind Shear (kt)</option>
@@ -151,13 +151,13 @@
                   <option value="SRH01" unit="m^2/s^2">0-1 km SRH (m^2/s^2)</option>
                   <option value="SFC_UWND" unit="kt (U Component)">Surface Wind Speed (U component; kt)</option>
                   <option value="SFC_VWND" unit="kt (V Component)">Surface Wind Speed (V component; kt)</option>
-                  <option value="PASS">---Moisture Parameters---</option>
+                  <option value="PASS" disabled>---Moisture Parameters---</option>
                   <option value="PW" unit="in" selected="selected">Precipitable Water (inches)</option>
                   <option value="MIXRATIO03KM" unit="g/kg">0-3 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIO01KM" unit="g/kg">0-1 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIOSFC850" unit="g/kg">Surface-850 mb Layer Mixing Ratio (g/kg)</option>
                   <option value="SFC_TD" unit="F">Surface Dewpoint (F)</option>
-                  <option value="PASS">---Fire Weather Parameters---</option>
+                  <option value="PASS" disabled>---Fire Weather Parameters---</option>
                   <option value="FOSBERG" unit="">Fosberg Index</option>
         
                   <!-- Way more December observations in RH.... what's going on there? -->
@@ -166,7 +166,7 @@
                   <!-- Units appear to be in celsius -->
                   <option value="SFC_T" unit="F">Surface Temperature (F)</option>
                   <option value="SFCWINDSPD" unit="kt">Surface Wind Speed (kt)</option>
-                  <option value="PASS">---Other Derived Parameters---</option>
+                  <option value="PASS" disabled>---Other Derived Parameters---</option>
                   <option value="STP_FIX" unit="">Fixed-Layer Sig-Tornado Parameter</option>
                   <option value="STP_EFF" unit="">Effective-Layer Sig-Tornado Parameter</option>
                   <option value="SCP_EFF" unit="">Effective-Layer SCP</option>
@@ -188,7 +188,7 @@
               <div class="dropdown-item" id="Yselect">
                 <label class="style5" for="chrtYparam">Y:</label>
                 <select class='wide-select' id="chrtYparam">
-                  <option value="PASS">---Mandatory Level Data---</option>
+                  <option value="PASS" disabled>---Mandatory Level Data---</option>
                   <option value="TEMP925" unit="C">925 mb Temperature (C)</option>
                   <option value="DEWPOINT925" unit="C">925 mb Dewpoint (C)</option>
                   <option value="MIXRATIO925" unit="g/kg">925 mb Mixing Ratio (g/kg)</option>
@@ -214,7 +214,7 @@
                   <option value="HEIGHT250" unit="m">250 mb Height (m)</option>
                   <option value="TEMP250" unit="C">250 mb Temperature (C)</option>
                   <option value="WINDSPD250" unit="kt">250 mb Wind Speed (kt)</option>
-                  <option value="PASS">---Instability Parameters---</option>
+                  <option value="PASS" disabled>---Instability Parameters---</option>
                   <option value="MLCAPE" unit="J/kg">Mixed Layer CAPE (J/kg)</option>
                   
                   <!-- Bad data exist in ML CIN... values are positive/too large -->
@@ -248,7 +248,7 @@
                   <option value="LAPSERATE85" unit="C/km">850-500 mb Lapse Rate (C/km)</option>
                   <option value="LAPSERATE36" unit="C/km">3-6 km AGL Lapse Rate (C/km)</option>
                   <option value="LAPSERATE03" unit="C/km">0-3 km AGL Lapse Rate (C/km)</option>
-                  <option value="PASS">---Kinematic Parameters---</option>
+                  <option value="PASS" disabled>---Kinematic Parameters---</option>
                   <option value="SHEAR06" unit="kt" selected="selected">0-6 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR03" unit="kt">0-3 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR01" unit="kt">0-1 km AGL Bulk Wind Shear (kt)</option>
@@ -260,13 +260,13 @@
                   <option value="SRH01" unit="m^2/s^2">0-1 km SRH (m^2/s^2)</option>
                   <option value="SFC_UWND" unit="kt (U Component)">Surface Wind Speed (U component; kt)</option>
                   <option value="SFC_VWND" unit="kt (V Component)">Surface Wind Speed (V component; kt)</option>
-                  <option value="PASS">---Moisture Parameters---</option>
+                  <option value="PASS" disabled>---Moisture Parameters---</option>
                   <option value="PW" unit="in">Precipitable Water (inches)</option>
                   <option value="MIXRATIO03KM" unit="g/kg">0-3 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIO01KM" unit="g/kg">0-1 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIOSFC850" unit="g/kg">Surface-850 mb Layer Mixing Ratio (g/kg)</option>
                   <option value="SFC_TD" unit="F">Surface Dewpoint (F)</option>
-                  <option value="PASS">---Fire Weather Parameters---</option>
+                  <option value="PASS" disabled>---Fire Weather Parameters---</option>
                   <option value="FOSBERG" unit="">Fosberg Index</option>
         
                   <!-- Way more December observations in RH.... what's going on there? -->
@@ -275,7 +275,7 @@
                   <!-- Units appear to be in celsius -->
                   <option value="SFC_T" unit="F">Surface Temperature (F)</option>
                   <option value="SFCWINDSPD" unit="kt">Surface Wind Speed (kt)</option>
-                  <option value="PASS">---Other Derived Parameters---</option>
+                  <option value="PASS" disabled>---Other Derived Parameters---</option>
                   <option value="STP_FIX" unit="">Fixed-Layer Sig-Tornado Parameter</option>
                   <option value="STP_EFF" unit="">Effective-Layer Sig-Tornado Parameter</option>
                   <option value="SCP_EFF" unit="">Effective-Layer SCP</option>
@@ -543,7 +543,7 @@
                 <label class="style5" for="sndparam">Select Display Parameter</label>
                 <br />
                 <select id="sndparam">
-                  <option value="PASS">---Mandatory Level Data---</option>
+                  <option value="PASS" disabled>---Mandatory Level Data---</option>
                   <option value="TEMP925" unit="C">925 mb Temperature (C)</option>
                   <option value="DEWPOINT925" unit="C">925 mb Dewpoint (C)</option>
                   <option value="MIXRATIO925" unit="g/kg">925 mb Mixing Ratio (g/kg)</option>
@@ -569,7 +569,7 @@
                   <option value="HEIGHT250" unit="m">250 mb Height (m)</option>
                   <option value="TEMP250" unit="C">250 mb Temperature (C)</option>
                   <option value="WINDSPD250" unit="kt">250 mb Wind Speed (kt)</option>
-                  <option value="PASS">---Instability Parameters---</option>
+                  <option value="PASS" disabled>---Instability Parameters---</option>
                   <option value="MLCAPE" unit="J/kg">Mixed Layer CAPE (J/kg)</option>
                   
                   <!-- Bad data exist in ML CIN... values are positive/too large -->
@@ -603,7 +603,7 @@
                   <option value="LAPSERATE85" unit="C/km">850-500 mb Lapse Rate (C/km)</option>
                   <option value="LAPSERATE36" unit="C/km">3-6 km AGL Lapse Rate (C/km)</option>
                   <option value="LAPSERATE03" unit="C/km">0-3 km AGL Lapse Rate (C/km)</option>
-                  <option value="PASS">---Kinematic Parameters---</option>
+                  <option value="PASS" disabled>---Kinematic Parameters---</option>
                   <option value="SHEAR06" unit="kt">0-6 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR03" unit="kt">0-3 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR01" unit="kt">0-1 km AGL Bulk Wind Shear (kt)</option>
@@ -615,13 +615,13 @@
                   <option value="SRH01" unit="m^2/s^2">0-1 km SRH (m^2/s^2)</option>
                   <option value="SFC_UWND" unit="kt (U Component)">Surface Wind Speed (U component; kt)</option>
                   <option value="SFC_VWND" unit="kt (V Component)">Surface Wind Speed (V component; kt)</option>
-                  <option value="PASS">---Moisture Parameters---</option>
+                  <option value="PASS" disabled>---Moisture Parameters---</option>
                   <option value="PW" unit="in" selected="selected">Precipitable Water (inches)</option>
                   <option value="MIXRATIO03KM" unit="g/kg">0-3 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIO01KM" unit="g/kg">0-1 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIOSFC850" unit="g/kg">Surface-850 mb Layer Mixing Ratio (g/kg)</option>
                   <option value="SFC_TD" unit="F">Surface Dewpoint (F)</option>
-                  <option value="PASS">---Fire Weather Parameters---</option>
+                  <option value="PASS" disabled>---Fire Weather Parameters---</option>
                   <option value="FOSBERG" unit="">Fosberg Index</option>
         
                   <!-- Way more December observations in RH.... what's going on there? -->
@@ -630,7 +630,7 @@
                   <!-- Units appear to be in celsius -->
                   <option value="SFC_T" unit="F">Surface Temperature (F)</option>
                   <option value="SFCWINDSPD" unit="kt">Surface Wind Speed (kt)</option>
-                  <option value="PASS">---Other Derived Parameters---</option>
+                  <option value="PASS" disabled>---Other Derived Parameters---</option>
                   <option value="STP_FIX" unit="">Fixed-Layer Sig-Tornado Parameter</option>
                   <option value="STP_EFF" unit="">Effective-Layer Sig-Tornado Parameter</option>
                   <option value="SCP_EFF" unit="">Effective-Layer SCP</option>
@@ -640,7 +640,7 @@
                   <!-- Values are negative... not sure if they're relative to something else or what -->
                   <option value="MELTINGLVL" unit="ft">Melting Level (ft)</option>
 
-                  <option value="PASS">---Mixing Height---</option>
+                  <option value="PASS" disabled>---Mixing Height---</option>
                   <option value="MIX_SFC" unit="m" class="mix">Mixing Height / Stull Sfc (m)</option>
                   <option value="MIX_SFC_1K" unit="m" class="mix">Mixing Height / Stull Sfc + 1 K (m)</option>
                   <option value="MIX_500M" unit="m" class="mix">Mixing Height / Stull 500m (m)</option>

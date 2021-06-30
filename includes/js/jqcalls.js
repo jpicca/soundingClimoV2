@@ -86,6 +86,10 @@ function parmChange() {
     $('#both').attr('disabled',true);
 
     $('#filtered').prop('checked',true);
+
+    // Need to update filtered here
+    updateFiltered();
+
     $('#raw').attr('disabled',true);
 
     $('.no-mix').prop('disabled',true);
