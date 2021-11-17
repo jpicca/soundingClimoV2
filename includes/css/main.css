@@ -88,6 +88,11 @@ label { margin-bottom: 0; margin-top: 0;}
   display: none;
 }
 
+#hex-drop-list {
+  margin-left: 3rem;
+  font-size: 0.75rem;
+}
+
 #hexDat {
   font-size: 0.8rem;
 }
@@ -166,6 +171,11 @@ label { margin-bottom: 0; margin-top: 0;}
 @keyframes example {
   from {opacity: 0.1;}
   to {opacity: 0.6;}
+}
+
+@keyframes example2 {
+  from {opacity: 0.1;}
+  to {opacity: 1;}
 }
 
 .selSite, .selBin {
@@ -313,8 +323,19 @@ path.symbol {
   font-weight: bold;
 }
 
-#instruction {
+#instruction, #nval-inst, #currentOb {
   font-size: 11px;
+}
+
+.locked, .hexOb {
+  animation-name: example2;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.hexOb {
+  visibility: hidden;
 }
 
 /* Used to adjust table size -- bootstrap default padding is too big */

@@ -11,7 +11,6 @@ d3Edge.dataManager = function module() {
       // Variables for current ob "scatterplot"
       scatDim, scatGroup;
 
-  //var filter0Fields = ['sbcape','mlcape', 'mucape', 'mlcape03', 'dcape'];
   var filter0Fields = ['mix_sfc','mix_sfc_1k','mix_500m','mix_sfc_pres','mix_sfc_1k_pres',
                       'mix_500m_pres']
 
@@ -51,13 +50,12 @@ d3Edge.dataManager = function module() {
 
   exports.fileName = function(stn, sndparm, filtered) {
     if (!arguments.length) return fileName;
-    if (filtered) {
+    if (filtered || (filter0Fields.includes(sndparm))) {
       fileName = "./datafiles/" + stn + "/" + stn + "-" + sndparm + "-filtered.csv";
     } else {
       fileName = "./datafiles/" + stn + "/" + stn + "-" + sndparm + ".csv";
     }
-
-    //console.log(`Filename: ${fileName}`)
+    
     return this;
   };
 
@@ -150,11 +148,11 @@ d3Edge.dataManager = function module() {
           d.date = parseDate(d.date);
 
           // Coerce 03Z to 00Z and 15Z to 12Z
-          if (d.date.getHours() == 3) {
-            d.date.setHours(0)
-          } else if (d.date.getHours() == 15) {
-            d.date.setHours(12)
-          }
+          // if (d.date.getHours() == 3) {
+          //   d.date.setHours(0)
+          // } else if (d.date.getHours() == 15) {
+          //   d.date.setHours(12)
+          // }
 
           d.val = +d.val;
 
@@ -356,12 +354,22 @@ d3Edge.dataManager = function module() {
 
   exports.formatObs = function () {
 
+    let obs00,obs12;
+
     let curObsObj = exports.getObs();
 
     let keys = Object.keys(curObsObj);
 
-    let obs00 = curObsObj[keys[1]]
-    let obs12 = curObsObj[keys[2]]
+    keys.forEach(key => {
+      if (key.slice(7,) == '0000') {
+        obs00 = curObsObj[key]
+      } else if (key.slice(7,) == '1200') {
+        obs12 = curObsObj[key]
+      }
+    })
+
+    // let obs00 = curObsObj[keys[1]]
+    // let obs12 = curObsObj[keys[2]]
 
     let scatXF = crossfilter();
     
@@ -389,6 +397,58 @@ d3Edge.dataManager = function module() {
       scatXF.add([{'date':date12,'val':obs12[soundParm]}])
     } catch (err) {
       console.log('No observation for 12z')
+    }
+
+    // For static data readout
+    let sndTime = exports.getSoundTime();
+    let el00 = d3.select('#current00')
+    let el12 = d3.select('#current12')
+
+    switch (sndTime) {
+      case '00z' :
+        
+        el00.attr('visibility','visible')
+        el12.attr('visibility','hidden')
+
+        break;
+      case '12z' :
+        
+        el12.attr('visibility','visible')
+        el00.attr('visibility','hidden')
+
+        break;
+      case 'all' :
+        
+        el00.attr('visibility','visible')
+        el12.attr('visibility','visible')
+
+        break;
+    }
+
+    // if (obs00[soundParm]) {
+    //   el00.html(`<b>Latest 00z ${soundParm} data: ${obs00[soundParm]} ${exports.getUnit()}</b>`)
+    // } else {
+    //   el00.html('<b>No data for 00z ${exports.getSoundParm()}</b>')
+    // }
+
+    try {
+      let value = obs00[soundParm]
+      el00.html(`<b>Latest 00z ${soundParm} data: ${value} ${exports.getUnit()}</b>`)
+    } catch (err) {
+      el00.html(`<b>No data for 00z ${exports.getSoundParm()}</b>`)
+    }
+
+    // if (obs12[soundParm]) {
+    //   el12.html(`<b>Latest 12z ${soundParm} data: ${obs12[soundParm]} ${exports.getUnit()}</b>`)
+    // } else {
+    //   el12.html('<b>No data for 12z ${exports.getSoundParm()}</b>')
+    // }
+
+    try {
+      let value = obs12[soundParm]
+      el12.html(`<b>Latest 12z ${soundParm} data: ${value} ${exports.getUnit()}</b>`)
+    } catch(err) {
+      el12.html(`<b>No data for 12z ${exports.getSoundParm()}</b>`)
     }
 
     scatDim = scatXF.dimension(d => [d['date'],d['val']])
@@ -490,6 +550,7 @@ d3Edge.dataManager = function module() {
   exports.getScatGroup = function() { return scatGroup };
 
   exports.getSoundTime = function() { return soundTime };
+  exports.getSoundParm = function() { return soundParm };
   
   return exports;
 

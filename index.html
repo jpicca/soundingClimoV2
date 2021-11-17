@@ -4,27 +4,35 @@
   <title>Storm Prediction Center Sounding Climatology Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
+  <link rel="stylesheet" type="text/css" href="includes/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="includes/css/main.css">
 
   <!-- GSA-sanctioned Google Analytics -->
   <script type="text/javascript" async="true" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=DOC&subagency=SPC&pua=UA-52727918-1"></script>
 
-  <!-- External Scripts -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <!-- Externally Developed JS Scripts -->
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+  <script src="includes/js/jquery-3.5.1.slim.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+  <script src="includes/js/popper.js"></script>
+  <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script> -->
+  <script src="includes/js/bootstrap.min.js"></script>
   <!-- <script src="includes/js/crossfilter.min.js"></script> -->
-  <script src="https://d3js.org/d3.v5.min.js"></script>
-  <script src="https://unpkg.com/topojson@3"></script>
-  <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script>
-  <script src="https://unpkg.com/crossfilter2@1.5/crossfilter.js"></script>
-  <script src="https://unpkg.com/dc@4/dist/dc.js"></script>
+  <!-- <script src="https://d3js.org/d3.v5.min.js"></script> -->
+  <script src="includes/js/d3.v5.min.js"></script>
+  <!-- <script src="https://unpkg.com/topojson@3"></script> -->
+  <!-- <script src="https://d3js.org/d3-hexbin.v0.2.min.js"></script> -->
+  <script src="includes/js/d3-hexbin.js"></script>
+  <!-- <script src="https://unpkg.com/crossfilter2@1.5/crossfilter.js"></script> -->
+  <!-- <script src="https://unpkg.com/dc@4/dist/dc.js"></script> -->
+  <script src="includes/js/dc.js"></script>
+  <script src="includes/js/crossfilter.min.js"></script>
+  <script src="includes/js/topojson.js"></script>
 
   <!-- Internal Scripts -->
   <script src="includes/js/datamanager.js"></script>
-  <!-- <script src="includes/js/hex.js"></script> -->
-  <!-- <script src="includes/js/plotting.js"></script> -->
+
 </head>
 <body>
   <div id="contentwrapper">
@@ -66,13 +74,12 @@
           <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown">
             Custom Options
           </button>
-          <div class="dropdown-menu">
+          <div class="dropdown-menu" id="hex-drop-list">
             <!-- <div class='row'> -->
               <div class="dropdown-item" id="Xselect">
-                <label class="style5" for="chrtXparam">X Parameter</label>
-                <br />
+                <label class="style5" for="chrtXparam">X: </label>
                 <select class='wide-select' id="chrtXparam">
-                  <option value="PASS">---Mandatory Level Data---</option>
+                  <option value="PASS" disabled>---Mandatory Level Data---</option>
                   <option value="TEMP925" unit="C">925 mb Temperature (C)</option>
                   <option value="DEWPOINT925" unit="C">925 mb Dewpoint (C)</option>
                   <option value="MIXRATIO925" unit="g/kg">925 mb Mixing Ratio (g/kg)</option>
@@ -98,19 +105,19 @@
                   <option value="HEIGHT250" unit="m">250 mb Height (m)</option>
                   <option value="TEMP250" unit="C">250 mb Temperature (C)</option>
                   <option value="WINDSPD250" unit="kt">250 mb Wind Speed (kt)</option>
-                  <option value="PASS">---Instability Parameters---</option>
+                  <option value="PASS" disabled>---Instability Parameters---</option>
                   <option value="MLCAPE" unit="J/kg">Mixed Layer CAPE (J/kg)</option>
                   
                   <!-- Bad data exist in ML CIN... values are positive/too large -->
                   <!-- <option value="MLCIN" unit="J/kg">Mixed Layer CIN (J/kg)</option> -->
         
-                  <option value="MLLCL" unit="m" disabled>Mixed Layer LCL (m)</option>
+                  <option value="MLLCL" unit="m">Mixed Layer LCL (m)</option>
         
                   <!-- Bad data exist in ML LFC csvs... values do not seem like LFCs (negative values exist) -->
-                  <option value="MLLFC" unit="m" disabled>Mixed Layer LFC (m)</option>
+                  <option value="MLLFC" unit="m">Mixed Layer LFC (m)</option>
         
                   <!-- Bad data in ML LI csvs... these seem like CAPE or some level data -->
-                  <option value="MLLI" unit="C" disabled>Mixed Layer LI (C)</option>
+                  <option value="MLLI" unit="C">Mixed Layer LI (C)</option>
         
                   <option value="MUCAPE" unit="J/kg">Most Unstable CAPE (J/kg)</option>
                   <option value="MUCIN" unit="J/kg">Most Unstable CIN (J/kg)</option>
@@ -124,7 +131,7 @@
                   <option value="SBLI" unit="C">Surface Based LI (C)</option>
         
                   <!-- Bad data... values may be in Celsius...? -->
-                  <option value="CONVTEMP" unit="F" disabled>Convective Temperature (F)</option>
+                  <option value="CONVTEMP" unit="F">Convective Temperature (F)</option>
         
                   <option value="MLCAPE03" unit="J/kg">Mixed Layer 0-3 km CAPE (J/kg)</option>
                   <option value="DCAPE" unit="J/kg">Downdraft CAPE (DCAPE) (J/kg)</option>
@@ -132,57 +139,56 @@
                   <option value="LAPSERATE85" unit="C/km">850-500 mb Lapse Rate (C/km)</option>
                   <option value="LAPSERATE36" unit="C/km">3-6 km AGL Lapse Rate (C/km)</option>
                   <option value="LAPSERATE03" unit="C/km">0-3 km AGL Lapse Rate (C/km)</option>
-                  <option value="PASS">---Kinematic Parameters---</option>
+                  <option value="PASS" disabled>---Kinematic Parameters---</option>
                   <option value="SHEAR06" unit="kt">0-6 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR03" unit="kt">0-3 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR01" unit="kt">0-1 km AGL Bulk Wind Shear (kt)</option>
                   
                   <!-- Not sure why this is disabled... guessing it's a calc thing -->
-                  <option value="EFF_SRH" unit="m^2/s^2" disabled>Effective SRH (m^2/s^2)</option>
+                  <option value="EFF_SRH" unit="m^2/s^2">Effective SRH (m^2/s^2)</option>
                   
                   <option value="SRH03" unit="m^2/s^2">0-3 km SRH (m^2/s^2)</option>
                   <option value="SRH01" unit="m^2/s^2">0-1 km SRH (m^2/s^2)</option>
                   <option value="SFC_UWND" unit="kt (U Component)">Surface Wind Speed (U component; kt)</option>
                   <option value="SFC_VWND" unit="kt (V Component)">Surface Wind Speed (V component; kt)</option>
-                  <option value="PASS">---Moisture Parameters---</option>
+                  <option value="PASS" disabled>---Moisture Parameters---</option>
                   <option value="PW" unit="in" selected="selected">Precipitable Water (inches)</option>
                   <option value="MIXRATIO03KM" unit="g/kg">0-3 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIO01KM" unit="g/kg">0-1 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIOSFC850" unit="g/kg">Surface-850 mb Layer Mixing Ratio (g/kg)</option>
                   <option value="SFC_TD" unit="F">Surface Dewpoint (F)</option>
-                  <option value="PASS">---Fire Weather Parameters---</option>
+                  <option value="PASS" disabled>---Fire Weather Parameters---</option>
                   <option value="FOSBERG" unit="">Fosberg Index</option>
         
                   <!-- Way more December observations in RH.... what's going on there? -->
                   <option value="SFC_RH" unit="%">Surface Relative Humidity (%)</option>
         
                   <!-- Units appear to be in celsius -->
-                  <option value="SFC_T" unit="F" disabled>Surface Temperature (F)</option>
+                  <option value="SFC_T" unit="F">Surface Temperature (F)</option>
                   <option value="SFCWINDSPD" unit="kt">Surface Wind Speed (kt)</option>
-                  <option value="PASS">---Other Derived Parameters---</option>
+                  <option value="PASS" disabled>---Other Derived Parameters---</option>
                   <option value="STP_FIX" unit="">Fixed-Layer Sig-Tornado Parameter</option>
-                  <option value="STP_EFF" unit="" disabled>Effective-Layer Sig-Tornado Parameter</option>
-                  <option value="SCP_EFF" unit="" disabled>Effective-Layer SCP</option>
+                  <option value="STP_EFF" unit="">Effective-Layer Sig-Tornado Parameter</option>
+                  <option value="SCP_EFF" unit="">Effective-Layer SCP</option>
                   <option value="SHIP" unit="">Significant Hail Parameter</option>
                   <option value="WBZHEIGHT" unit="ft">Wet Bulb Zero Height (ft)</option>
         
                   <!-- Values are negative... not sure if they're relative to something else or what -->
-                  <option value="MELTINGLVL" unit="ft" disabled>Melting Level (ft)</option>
+                  <option value="MELTINGLVL" unit="ft">Melting Level (ft)</option>
                 </select>
               </div>
               <div class="dropdown-item">
-                <label for="x-min">X Min:</label>
+                <label for="x-min">Min:</label>
                 <input type="text" name="x-min" id="x-min" size="5" />
               <!-- </div> -->
               <!-- <div class="dropdown-item"> -->
-                <label for="x-max">X Max:</label>
+                <label for="x-max">Max:</label>
                 <input type="text" name="x-max" id="x-max" size="5" />
               </div>
               <div class="dropdown-item" id="Yselect">
-                <label class="style5" for="chrtYparam">Y Parameter</label>
-                <br />
+                <label class="style5" for="chrtYparam">Y:</label>
                 <select class='wide-select' id="chrtYparam">
-                  <option value="PASS">---Mandatory Level Data---</option>
+                  <option value="PASS" disabled>---Mandatory Level Data---</option>
                   <option value="TEMP925" unit="C">925 mb Temperature (C)</option>
                   <option value="DEWPOINT925" unit="C">925 mb Dewpoint (C)</option>
                   <option value="MIXRATIO925" unit="g/kg">925 mb Mixing Ratio (g/kg)</option>
@@ -208,19 +214,19 @@
                   <option value="HEIGHT250" unit="m">250 mb Height (m)</option>
                   <option value="TEMP250" unit="C">250 mb Temperature (C)</option>
                   <option value="WINDSPD250" unit="kt">250 mb Wind Speed (kt)</option>
-                  <option value="PASS">---Instability Parameters---</option>
+                  <option value="PASS" disabled>---Instability Parameters---</option>
                   <option value="MLCAPE" unit="J/kg">Mixed Layer CAPE (J/kg)</option>
                   
                   <!-- Bad data exist in ML CIN... values are positive/too large -->
                   <!-- <option value="MLCIN" unit="J/kg">Mixed Layer CIN (J/kg)</option> -->
         
-                  <option value="MLLCL" unit="m" disabled>Mixed Layer LCL (m)</option>
+                  <option value="MLLCL" unit="m">Mixed Layer LCL (m)</option>
         
                   <!-- Bad data exist in ML LFC csvs... values do not seem like LFCs (negative values exist) -->
-                  <option value="MLLFC" unit="m" disabled>Mixed Layer LFC (m)</option>
+                  <option value="MLLFC" unit="m">Mixed Layer LFC (m)</option>
         
                   <!-- Bad data in ML LI csvs... these seem like CAPE or some level data -->
-                  <option value="MLLI" unit="C" disabled>Mixed Layer LI (C)</option>
+                  <option value="MLLI" unit="C">Mixed Layer LI (C)</option>
         
                   <option value="MUCAPE" unit="J/kg">Most Unstable CAPE (J/kg)</option>
                   <option value="MUCIN" unit="J/kg">Most Unstable CIN (J/kg)</option>
@@ -234,7 +240,7 @@
                   <option value="SBLI" unit="C">Surface Based LI (C)</option>
         
                   <!-- Bad data... values may be in Celsius...? -->
-                  <option value="CONVTEMP" unit="F" disabled>Convective Temperature (F)</option>
+                  <option value="CONVTEMP" unit="F">Convective Temperature (F)</option>
         
                   <option value="MLCAPE03" unit="J/kg">Mixed Layer 0-3 km CAPE (J/kg)</option>
                   <option value="DCAPE" unit="J/kg">Downdraft CAPE (DCAPE) (J/kg)</option>
@@ -242,51 +248,62 @@
                   <option value="LAPSERATE85" unit="C/km">850-500 mb Lapse Rate (C/km)</option>
                   <option value="LAPSERATE36" unit="C/km">3-6 km AGL Lapse Rate (C/km)</option>
                   <option value="LAPSERATE03" unit="C/km">0-3 km AGL Lapse Rate (C/km)</option>
-                  <option value="PASS">---Kinematic Parameters---</option>
+                  <option value="PASS" disabled>---Kinematic Parameters---</option>
                   <option value="SHEAR06" unit="kt" selected="selected">0-6 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR03" unit="kt">0-3 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR01" unit="kt">0-1 km AGL Bulk Wind Shear (kt)</option>
                   
                   <!-- Not sure why this is disabled... guessing it's a calc thing -->
-                  <option value="EFF_SRH" unit="m^2/s^2" disabled>Effective SRH (m^2/s^2)</option>
+                  <option value="EFF_SRH" unit="m^2/s^2">Effective SRH (m^2/s^2)</option>
                   
                   <option value="SRH03" unit="m^2/s^2">0-3 km SRH (m^2/s^2)</option>
                   <option value="SRH01" unit="m^2/s^2">0-1 km SRH (m^2/s^2)</option>
                   <option value="SFC_UWND" unit="kt (U Component)">Surface Wind Speed (U component; kt)</option>
                   <option value="SFC_VWND" unit="kt (V Component)">Surface Wind Speed (V component; kt)</option>
-                  <option value="PASS">---Moisture Parameters---</option>
+                  <option value="PASS" disabled>---Moisture Parameters---</option>
                   <option value="PW" unit="in">Precipitable Water (inches)</option>
                   <option value="MIXRATIO03KM" unit="g/kg">0-3 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIO01KM" unit="g/kg">0-1 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIOSFC850" unit="g/kg">Surface-850 mb Layer Mixing Ratio (g/kg)</option>
                   <option value="SFC_TD" unit="F">Surface Dewpoint (F)</option>
-                  <option value="PASS">---Fire Weather Parameters---</option>
+                  <option value="PASS" disabled>---Fire Weather Parameters---</option>
                   <option value="FOSBERG" unit="">Fosberg Index</option>
         
                   <!-- Way more December observations in RH.... what's going on there? -->
                   <option value="SFC_RH" unit="%">Surface Relative Humidity (%)</option>
         
                   <!-- Units appear to be in celsius -->
-                  <option value="SFC_T" unit="F" disabled>Surface Temperature (F)</option>
+                  <option value="SFC_T" unit="F">Surface Temperature (F)</option>
                   <option value="SFCWINDSPD" unit="kt">Surface Wind Speed (kt)</option>
-                  <option value="PASS">---Other Derived Parameters---</option>
+                  <option value="PASS" disabled>---Other Derived Parameters---</option>
                   <option value="STP_FIX" unit="">Fixed-Layer Sig-Tornado Parameter</option>
-                  <option value="STP_EFF" unit="" disabled>Effective-Layer Sig-Tornado Parameter</option>
-                  <option value="SCP_EFF" unit="" disabled>Effective-Layer SCP</option>
+                  <option value="STP_EFF" unit="">Effective-Layer Sig-Tornado Parameter</option>
+                  <option value="SCP_EFF" unit="">Effective-Layer SCP</option>
                   <option value="SHIP" unit="">Significant Hail Parameter</option>
                   <option value="WBZHEIGHT" unit="ft">Wet Bulb Zero Height (ft)</option>
         
                   <!-- Values are negative... not sure if they're relative to something else or what -->
-                  <option value="MELTINGLVL" unit="ft" disabled>Melting Level (ft)</option>
+                  <option value="MELTINGLVL" unit="ft">Melting Level (ft)</option>
                 </select>
               </div>
               <div class="dropdown-item">
-                <label for="y-min">Y Min:</label>
+                <label for="y-min">Min:</label>
                 <input type="text" name="y-min" id="y-min" size="5" />
               <!-- </div> -->
               <!-- <div class="dropdown-item"> -->
-                <label for="y-max">Y Max:</label>
+                <label for="y-max">Max:</label>
                 <input type="text" name="y-max" id="y-max" size="5" />
+              </div>
+              <hr>
+              <div class="dropdown-item">
+                <label for="bin-size">Hexbin Pixel Radius:</label>
+                <input type="number" name="bin-size" id="bin-size" size="3" value="8"/>
+              </div>
+              <hr>
+              <div class='dropdown-item'>
+                <button class="btn btn-secondary btn-sm" id='hexobsBtn' type="button">
+                  <span>Toggle Latest Obs</span>
+                </button>
               </div>
               <hr>
               <div class="dropdown-item">
@@ -391,6 +408,7 @@
                   <option value="31" selected>31</option>
                 </select>
               </div>
+
             <!-- </div> -->
             <div class='dropdown-item'>
               <button class="btn btn-secondary btn-sm" id='hex-update' type="button">
@@ -408,10 +426,6 @@
 
       <h1 id='hex-build'>Building Chart, One Moment</h1>
       <h2 id='hexLabel'>All OUN (Filtered)</h2>
-            
-      <!-- <svg viewBox="0 0 975 610"> 
-      
-      </svg> -->
 
     </div>
 
@@ -529,7 +543,7 @@
                 <label class="style5" for="sndparam">Select Display Parameter</label>
                 <br />
                 <select id="sndparam">
-                  <option value="PASS">---Mandatory Level Data---</option>
+                  <option value="PASS" disabled>---Mandatory Level Data---</option>
                   <option value="TEMP925" unit="C">925 mb Temperature (C)</option>
                   <option value="DEWPOINT925" unit="C">925 mb Dewpoint (C)</option>
                   <option value="MIXRATIO925" unit="g/kg">925 mb Mixing Ratio (g/kg)</option>
@@ -555,19 +569,19 @@
                   <option value="HEIGHT250" unit="m">250 mb Height (m)</option>
                   <option value="TEMP250" unit="C">250 mb Temperature (C)</option>
                   <option value="WINDSPD250" unit="kt">250 mb Wind Speed (kt)</option>
-                  <option value="PASS">---Instability Parameters---</option>
+                  <option value="PASS" disabled>---Instability Parameters---</option>
                   <option value="MLCAPE" unit="J/kg">Mixed Layer CAPE (J/kg)</option>
                   
                   <!-- Bad data exist in ML CIN... values are positive/too large -->
                   <!-- <option value="MLCIN" unit="J/kg">Mixed Layer CIN (J/kg)</option> -->
         
-                  <option value="MLLCL" unit="m" disabled>Mixed Layer LCL (m)</option>
+                  <option value="MLLCL" unit="m">Mixed Layer LCL (m)</option>
         
                   <!-- Bad data exist in ML LFC csvs... values do not seem like LFCs (negative values exist) -->
-                  <option value="MLLFC" unit="m" disabled>Mixed Layer LFC (m)</option>
+                  <option value="MLLFC" unit="m">Mixed Layer LFC (m)</option>
         
                   <!-- Bad data in ML LI csvs... these seem like CAPE or some level data -->
-                  <option value="MLLI" unit="C" disabled>Mixed Layer LI (C)</option>
+                  <option value="MLLI" unit="C">Mixed Layer LI (C)</option>
         
                   <option value="MUCAPE" unit="J/kg">Most Unstable CAPE (J/kg)</option>
                   <option value="MUCIN" unit="J/kg">Most Unstable CIN (J/kg)</option>
@@ -581,7 +595,7 @@
                   <option value="SBLI" unit="C">Surface Based LI (C)</option>
         
                   <!-- Bad data... values may be in Celsius...? -->
-                  <option value="CONVTEMP" unit="F" disabled>Convective Temperature (F)</option>
+                  <option value="CONVTEMP" unit="F">Convective Temperature (F)</option>
         
                   <option value="MLCAPE03" unit="J/kg">Mixed Layer 0-3 km CAPE (J/kg)</option>
                   <option value="DCAPE" unit="J/kg">Downdraft CAPE (DCAPE) (J/kg)</option>
@@ -589,44 +603,44 @@
                   <option value="LAPSERATE85" unit="C/km">850-500 mb Lapse Rate (C/km)</option>
                   <option value="LAPSERATE36" unit="C/km">3-6 km AGL Lapse Rate (C/km)</option>
                   <option value="LAPSERATE03" unit="C/km">0-3 km AGL Lapse Rate (C/km)</option>
-                  <option value="PASS">---Kinematic Parameters---</option>
+                  <option value="PASS" disabled>---Kinematic Parameters---</option>
                   <option value="SHEAR06" unit="kt">0-6 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR03" unit="kt">0-3 km AGL Bulk Wind Shear (kt)</option>
                   <option value="SHEAR01" unit="kt">0-1 km AGL Bulk Wind Shear (kt)</option>
                   
                   <!-- Not sure why this is disabled... guessing it's a calc thing -->
-                  <option value="EFF_SRH" unit="m^2/s^2" disabled>Effective SRH (m^2/s^2)</option>
+                  <option value="EFF_SRH" unit="m^2/s^2">Effective SRH (m^2/s^2)</option>
                   
                   <option value="SRH03" unit="m^2/s^2">0-3 km SRH (m^2/s^2)</option>
                   <option value="SRH01" unit="m^2/s^2">0-1 km SRH (m^2/s^2)</option>
                   <option value="SFC_UWND" unit="kt (U Component)">Surface Wind Speed (U component; kt)</option>
                   <option value="SFC_VWND" unit="kt (V Component)">Surface Wind Speed (V component; kt)</option>
-                  <option value="PASS">---Moisture Parameters---</option>
+                  <option value="PASS" disabled>---Moisture Parameters---</option>
                   <option value="PW" unit="in" selected="selected">Precipitable Water (inches)</option>
                   <option value="MIXRATIO03KM" unit="g/kg">0-3 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIO01KM" unit="g/kg">0-1 km Mixing Ratio (g/kg)</option>
                   <option value="MIXRATIOSFC850" unit="g/kg">Surface-850 mb Layer Mixing Ratio (g/kg)</option>
                   <option value="SFC_TD" unit="F">Surface Dewpoint (F)</option>
-                  <option value="PASS">---Fire Weather Parameters---</option>
+                  <option value="PASS" disabled>---Fire Weather Parameters---</option>
                   <option value="FOSBERG" unit="">Fosberg Index</option>
         
                   <!-- Way more December observations in RH.... what's going on there? -->
                   <option value="SFC_RH" unit="%">Surface Relative Humidity (%)</option>
         
                   <!-- Units appear to be in celsius -->
-                  <option value="SFC_T" unit="F" disabled>Surface Temperature (F)</option>
+                  <option value="SFC_T" unit="F">Surface Temperature (F)</option>
                   <option value="SFCWINDSPD" unit="kt">Surface Wind Speed (kt)</option>
-                  <option value="PASS">---Other Derived Parameters---</option>
+                  <option value="PASS" disabled>---Other Derived Parameters---</option>
                   <option value="STP_FIX" unit="">Fixed-Layer Sig-Tornado Parameter</option>
-                  <option value="STP_EFF" unit="" disabled>Effective-Layer Sig-Tornado Parameter</option>
-                  <option value="SCP_EFF" unit="" disabled>Effective-Layer SCP</option>
+                  <option value="STP_EFF" unit="">Effective-Layer Sig-Tornado Parameter</option>
+                  <option value="SCP_EFF" unit="">Effective-Layer SCP</option>
                   <option value="SHIP" unit="">Significant Hail Parameter</option>
                   <option value="WBZHEIGHT" unit="ft">Wet Bulb Zero Height (ft)</option>
         
                   <!-- Values are negative... not sure if they're relative to something else or what -->
-                  <option value="MELTINGLVL" unit="ft" disabled>Melting Level (ft)</option>
+                  <option value="MELTINGLVL" unit="ft">Melting Level (ft)</option>
 
-                  <option value="PASS">---Mixing Height---</option>
+                  <option value="PASS" disabled>---Mixing Height---</option>
                   <option value="MIX_SFC" unit="m" class="mix">Mixing Height / Stull Sfc (m)</option>
                   <option value="MIX_SFC_1K" unit="m" class="mix">Mixing Height / Stull Sfc + 1 K (m)</option>
                   <option value="MIX_500M" unit="m" class="mix">Mixing Height / Stull 500m (m)</option>
@@ -648,7 +662,7 @@
             </li>
             <li class="nav-item py-1 px-lg-3"> 
               <div style='text-align: center;'>
-                <!-- <button id='obsBtn' class='btn btn-sm btn-link'>Toggle Current Ob</button> -->
+                <button id='obsBtn' class='btn btn-sm btn-link'>Plot Current Ob</button>
               </div>
             </li>
             <li class="nav-item px-lg-3 my-auto">
@@ -706,7 +720,7 @@
 
           </div> -->
           <div id='loading-page' class='text-center col-sm-12'>
-            <h2><span>Loading/Preparing new data!</span></h2>
+            <h2><span>Preparing new data!</span></h2>
             <!-- <img src='https://i.imgur.com/605rNWr.gif' /> -->
           </div>
           <div id='svg-plot' class='col-sm-12'>
@@ -762,20 +776,29 @@
                     </tr>
                   </tbody>
                 </table>
-
+                <div id='currentOb'>
+                  <div id="current00"></div>
+                  <div id="current12"></div>
+                </div>
                 </div>
               </div>
               <hr />
                 <div class='row'>
-                  <div class='row col-lg-12' style='margin-bottom: 1rem;'>
-                    <span class='table-title'>Selected Time Range Max/Min</span>
+                  <div class='row col-lg-12'>
+                    <span class='table-title' style="margin-bottom: 0.5rem;">Selected Time Range Max/Min</span>
+                    <!-- <label class='table-title' for="n_vals">Number of Values to Show</label>
+                    <input type="text" name="n_vals" id="n_vals" size="5" /> -->
+                  </div>
+                  <div class='row col-lg-12'>
+                    <label id='nval-inst' for="n_vals">Number of Soundings to Show: </label>
+                    <input type="number" min="1" name="n_vals" id="n_vals" size="5" value="5" style="margin-bottom: 0.5rem;"/>
                   </div>
                   
                   <div id='max-table' class='col-6 table'>
-                    <span class='table-title'>Max 5 Values</span>
+                    <span class='table-title'>Max Values</span>
                   </div>
                   <div id='min-table' class='col-6 table'>
-                    <span class='table-title'>Min 5 Values</span>
+                    <span class='table-title'>Min Values</span>
                   </div>
                 </div>
                 <hr />
@@ -785,6 +808,7 @@
 
                   </div>
                 </div>
+                <p id="por" class='table-title'>Period of Record<br /><span id="por-text"></span><br /></p>
                 
               </div>
             </div>

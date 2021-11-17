@@ -28,6 +28,20 @@ function stationChange() {
 
   updateHex(hexchart);
 
+  updatePOR();
+
+}
+
+$("#n_vals").on("change", maxMinVal);
+
+function maxMinVal() {
+  // console.log(+$('#n_vals').val())
+
+  if (isNaN(+$('#n_vals').val())) { +$('#n_vals').val(5) }
+
+  // Update tables
+  maxTab.size(+$('#n_vals').val()).redraw()
+  minTab.size(+$('#n_vals').val()).redraw()
 }
 
 // On Time Change
@@ -72,6 +86,10 @@ function parmChange() {
     $('#both').attr('disabled',true);
 
     $('#filtered').prop('checked',true);
+
+    // Need to update filtered here
+    updateFiltered();
+
     $('#raw').attr('disabled',true);
 
     $('.no-mix').prop('disabled',true);
@@ -233,6 +251,22 @@ $('#chartBtn').on("click", () => {
   $('#chart-container').show();
     
 });
+
+$('#hexobsBtn').on("click", () => {
+
+  let circles = d3.selectAll('.hexOb');
+
+  if (circles.empty()) {
+    alert('No current data available to plot for this station/parameter combination.')
+  } else {
+
+    if (circles.style('visibility') == 'visible') {
+      circles.style('visibility', 'hidden')
+    } else {
+      circles.style('visibility', 'visible')
+    }
+  }
+})
 
 $('#obsBtn').on("click", () => {
 

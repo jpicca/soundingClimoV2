@@ -77,17 +77,15 @@ class tsChart {
       .elasticY(false)
       .y(d3.scaleLinear()
           .domain(domainArr))
-          // .domain(() => {
-          //   if (flip) {
-          //     return [max,min]
-          //   } else {
-          //     return [min,max]
-          //   }
-          // }))
-            //(flip) => {if(flip) { return [max,min] } else { return [min,max] }}))
       .rangeChart(range)
       .brushOn(false)
-      .title(d => {return d3.timeFormat('%b %d')(d.key)})
+      .title(d => {
+        let text = d3.timeFormat('%b %d (%HZ)')(d.key);
+        if (text == ' NaN (NaNZ)') { 
+          text = `${d.key[1]}${dm.getUnit()}` 
+        } 
+        return text;
+      })
       .compose([
         new dc.LineChart(dcChart)
             .dimension(dim)
@@ -123,7 +121,7 @@ class tsChart {
         new dc.ScatterPlot(dcChart)
             .dimension(dm.getScatDim())
             .group(dm.getScatGroup())
-            .symbolSize(15)
+            .symbolSize(20)
             .ordinalColors(['black'])
       ])
       // Use the highlighting function to bind data updating on render/re-draws
@@ -306,7 +304,8 @@ class tabChart {
 
     dcChart.width(this.width)
         .dimension(dim)
-        .size(5)
+        //.size(5)
+        .size(+$('#n_vals').val())
         .order(ordering)
         .columns([
           //'date',
@@ -388,6 +387,7 @@ function highlighting() {
       let instruct = d3.select('#instruction')
         
       instruct.html('<a href="#">&nbsp; Unlock Data</a>')
+      instruct.classed('locked',true);
 
       // Clear the data lock but prevent the click from scrolling to the top of the page
 
@@ -402,6 +402,7 @@ function clearLock() {
   let instruct = d3.select('#instruction')
 
   instruct.html('&nbsp; (Click sampled date to lock data)')
+  instruct.classed('locked',false)
 
   d3.selectAll('.datetime')
     .classed('datetime',false)
@@ -570,7 +571,7 @@ class hexChart {
         this.hexbins = d3.hexbin()
                     .x(d => this.x(d.val1))
                     .y(d => this.y(d.val))
-                    .radius(8)
+                    .radius(+$('#bin-size').val())
                     .extent([[this.margin.left, this.margin.top], 
                         [this.width - this.margin.right, this.height - this.margin.bottom]])
 
@@ -580,7 +581,7 @@ class hexChart {
 
     }
 
-    makePlot() {
+    async makePlot() {
 
         $('#hexLabel').html(`<b>All ${hexParm.station.toUpperCase()}</b> (Filtered)`)
 
@@ -592,8 +593,9 @@ class hexChart {
                     .attr("width", this.width)
                     .attr("height", this.height);
 
-        svg.append("g")
-            .attr("stroke", "#000")
+        let hexArea = svg.append("g");
+
+        hexArea.attr("stroke", "#000")
             .attr("stroke-opacity", 0.1)
             .selectAll("path")
             .data(this.bins)
@@ -630,6 +632,74 @@ class hexChart {
 
 
             });
+
+        // Add current observation points
+        // Wait on the proper obs
+        await dm.readObs();
+        let curObsObj = dm.getObs();
+        let obs00, obs12;
+        let hex_obs = [];
+
+        let keys = Object.keys(curObsObj);
+          
+        keys.forEach(key => {
+          if (key.slice(7,) == '0000') {
+            obs00 = curObsObj[key]
+          } else if (key.slice(7,) == '1200') {
+            obs12 = curObsObj[key]
+          }
+        })
+
+        let xparm = document.getElementById('chrtXparam').value.toLowerCase()
+        let yparm = document.getElementById('chrtYparam').value.toLowerCase()
+        
+        try {
+          let xval_00 = obs00[xparm]
+          let yval_00 = obs00[yparm]
+
+          if (xval_00 && yval_00) {
+            hex_obs.push({x: xval_00,y: yval_00,t: '00z'})
+          }
+
+        } catch (err) {
+          console.log('00z ob is missing for hexbin plotting')
+        }
+
+        try {
+          let xval_12 = obs12[xparm]
+          let yval_12 = obs12[yparm]
+
+          if (xval_12 && yval_12) {
+            hex_obs.push({x: xval_12,y: yval_12,t: '12z'})
+          }
+        
+        } catch (err) {
+          console.log('12z ob is missing for hexbin plotting')
+        }
+
+        // hex_obs = [{x: xval_00,y: yval_00,t: '00z'}, {x: xval_12, y: yval_12, t: '12z'}]
+        
+        hexArea.selectAll("circle")
+            .data(hex_obs)
+            .join("circle")
+            .attr("stroke","black")
+            .attr("stroke-width", 0.5)
+            .attr("fill","white")
+            .attr("cx",d => this.x(d.x))
+            .attr("cy",d => this.y(d.y))
+            .attr("r", 10)
+            .classed('hexOb', true)
+
+        hexArea.selectAll(".obText")
+            .data(hex_obs)
+            .join("text")
+            .text(d => d.t)
+            .attr("x",d => this.x(d.x))
+            .attr("y",d => this.y(d.y) + 4) // Add half of the font size
+            .classed('obText',true)
+            .classed('hexOb', true)
+            .attr('text-anchor','middle')
+            .attr('font-size','8px')
 
         svg.append("g")
             .call(this.xAxis);
@@ -669,16 +739,6 @@ function updateSmoothPeriod() {
 // Update the DataManager Sounding Parameter
 function updateSoundParm() { dm.soundParm($('#sndparam option:selected').val().toLowerCase()); };
 function updateSoundParmUnit() { dm.soundParmUnit($('#sndparam option:selected').attr('unit')); };
-
-// Need to return a resolved promise for async jq call functions
-// function updateQuantiles() {
-//   return new Promise((resolve,reject) => {
-
-//     dm.createDefaultQuantiles();
-
-//     resolve();
-//   })
-// }
 
 // Update the data in the DataManager in async fashion
 async function updateData(init=true) {
@@ -867,6 +927,13 @@ async function updateHex(chart) {
   $('#hex-build').hide()
 }
 
+function updatePOR() {
+
+  let station = dm.station();
+  d3.select('#por-text').html(por[station])
+
+}
+
 $(window).ready(function() {
 
   dm = d3Edge.dataManager();
@@ -893,5 +960,7 @@ $(window).ready(function() {
   // Instantiate a hexchart object and run first chart update behind the scenes
   hexchart = new hexChart();
   updateHex(hexchart);
+
+  updatePOR();
 
 })
