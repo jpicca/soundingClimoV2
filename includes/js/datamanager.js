@@ -366,27 +366,6 @@ d3Edge.dataManager = function module() {
 
     obs00 = curObsObj[vtime00.soundingString()], obs12 = curObsObj[vtime12.soundingString()];
 
-    // keys.forEach(key => {
-    //   if (key.slice(7,) == '0000') {
-    //     obs00 = curObsObj[key]
-    //   } else if (key.slice(7,) == '1200') {
-    //     obs12 = curObsObj[key]
-    //   }
-    // })
-
-
-
-    if ( stime == '00z') {
-      vtime = getLatest00();
-    } else if ( stime = '12z') {
-      vtime = getLatest12();
-    } else {
-      vtime = getLatest();
-    }
-
-    console.log(vtime.soundingString());
-    // let vtime = 
-
     let scatXF = crossfilter();
     
     try {

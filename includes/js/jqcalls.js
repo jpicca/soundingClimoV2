@@ -293,8 +293,10 @@ $('#obsBtn').on("click", () => {
   try {
     if (circle.style('visibility') == 'hidden') {
       circle.style('visibility','visible');
+
     } else {
       circle.style('visibility','hidden');
+
     }
   } catch(err) {
     alert('No observation available at this time!')
