@@ -400,45 +400,12 @@ d3Edge.dataManager = function module() {
     let el00 = d3.select('#current00')
     let el12 = d3.select('#current12')
 
-    // switch (sndTime) {
-    //   case '00z' :
-        
-    //     el00.attr('visibility','visible')
-    //     el12.attr('visibility','hidden')
-
-    //     break;
-    //   case '12z' :
-        
-    //     el12.attr('visibility','visible')
-    //     el00.attr('visibility','hidden')
-
-    //     break;
-    //   case 'all' :
-        
-    //     el00.attr('visibility','visible')
-    //     el12.attr('visibility','visible')
-
-    //     break;
-    // }
-
-    // if (obs00[soundParm]) {
-    //   el00.html(`<b>Latest 00z ${soundParm} data: ${obs00[soundParm]} ${exports.getUnit()}</b>`)
-    // } else {
-    //   el00.html('<b>No data for 00z ${exports.getSoundParm()}</b>')
-    // }
-
     try {
       let value = obs00[soundParm]
       el00.html(`<b>Latest 00z ${soundParm} data: ${value} ${exports.getUnit()}</b>`)
     } catch (err) {
       el00.html(`<b>No data for 00z ${exports.getSoundParm()}</b>`)
     }
-
-    // if (obs12[soundParm]) {
-    //   el12.html(`<b>Latest 12z ${soundParm} data: ${obs12[soundParm]} ${exports.getUnit()}</b>`)
-    // } else {
-    //   el12.html('<b>No data for 12z ${exports.getSoundParm()}</b>')
-    // }
 
     try {
       let value = obs12[soundParm]
