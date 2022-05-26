@@ -370,7 +370,6 @@ d3Edge.dataManager = function module() {
     
     try {
 
-      // let date00 = dateFromDay(2008,dateToDay(parseDate(keys[1])))
       let date00 = dateFromDay(2008,dateToDay(parseDate(vtime00.soundingString())))
 
       if (!obs00[soundParm]) {
