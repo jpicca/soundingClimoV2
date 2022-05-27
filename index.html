@@ -671,9 +671,6 @@
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown">
                   Custom Options
                 </button>
-                <!-- <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Custom Options
-                </a> -->
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <div class="dropdown-item">
                     <label for="ymax">Y-Axis Max Value:</label>
@@ -721,7 +718,6 @@
           </div> -->
           <div id='loading-page' class='text-center col-sm-12'>
             <h2><span>Preparing new data!</span></h2>
-            <!-- <img src='https://i.imgur.com/605rNWr.gif' /> -->
           </div>
           <div id='svg-plot' class='col-sm-12'>
             <div id='plot-holder' class='row'>
@@ -791,7 +787,7 @@
                   </div>
                   <div class='row col-lg-12'>
                     <label id='nval-inst' for="n_vals">Number of Soundings to Show: </label>
-                    <input type="number" min="1" name="n_vals" id="n_vals" size="5" value="5" style="margin-bottom: 0.5rem;"/>
+                    <input type="number" min="1" name="n_vals" id="n_vals" size="5" value="5" pattern="\\d*" style="margin-bottom: 0.5rem;"/>
                   </div>
                   
                   <div id='max-table' class='col-6 table'>
@@ -830,6 +826,17 @@
   <script src="includes/js/parmHelper.js"></script>
   <script src="includes/js/mainWeb.js"></script>
   <script src="includes/js/mapping.js"></script>
+
+  <script>
+
+    if(/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
+      {
+          var inputs = document.querySelectorAll('input[type="number"]');
+          for(var i = inputs.length; i--;)
+              inputs[i].setAttribute('pattern', '\\d*');
+      }
+
+  </script>
   
 </body>
 </html>
