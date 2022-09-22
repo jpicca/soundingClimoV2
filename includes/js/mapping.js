@@ -6,6 +6,8 @@ d3.json('./includes/misc/counties-albers-10m.json').then(function(us) {
     
     var projection = d3.geoAlbersUsa().scale(1300).translate([487.5, 305])
 
+    var standardR = 7;
+
     d3.select('#map-container svg').html(`
         <g fill="none" stroke="#000" stroke-linejoin="round" stroke-linecap="round">
         <path stroke="#aaa" stroke-width="0.5" d="${path(topojson.mesh(us, us.objects.counties, (a, b) => a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0)))}"></path>
@@ -37,9 +39,49 @@ d3.json('./includes/misc/counties-albers-10m.json').then(function(us) {
                     return false;
                 }
             })
-            .attr("r", 10)
-            .attr("cx",d => projection([d.coordinates[1],d.coordinates[0]])[0])
-            .attr("cy",d => projection([d.coordinates[1],d.coordinates[0]])[1])
+            .attr("r", standardR)
+            .attr("cx",
+                d => {
+                    if (d.ID == 'SJU') {
+                        return 750;
+                    } else if (d.ID == 'GUM') {
+                        return 750;
+                    } else if (d.ID == 'STU') {
+                        return 750;
+                    } else {
+                        return projection([d.coordinates[1],d.coordinates[0]])[0]
+                    }
+                })
+            .attr("cy",
+                d => {
+                    if (d.ID == 'SJU') {
+                        return 30;
+                    } else if (d.ID == 'GUM') {
+                        return 80;
+                    } else if (d.ID == 'STU') {
+                        return 130;
+                    } else {
+                        return projection([d.coordinates[1],d.coordinates[0]])[1]
+                    }
+                })
+            
+        mapG.append("text")
+            .attr('class','citytext')
+            .text('San Juan')
+            .attr("x", 750)
+            .attr("y", 55)
+
+        mapG.append("text")
+            .attr('class','citytext')
+            .text('Guam')
+            .attr("x", 750)
+            .attr("y", 105)
+
+        mapG.append("text")
+            .attr('class','citytext')
+            .text('Pago Pago')
+            .attr("x", 750)
+            .attr("y", 155)
             
         citypoints.on('click', d => {
 
@@ -70,7 +112,7 @@ d3.json('./includes/misc/counties-albers-10m.json').then(function(us) {
 
         // Make the circle small on mouseout
         citypoints.on('mouseout', d => {
-            d3.select(`#${d.ID}`).attr('r',10)
+            d3.select(`#${d.ID}`).attr('r',standardR)
         })
 
     });

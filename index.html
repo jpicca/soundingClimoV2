@@ -50,12 +50,22 @@
     </nav>
 
     <div id='map-container'>
-      <button class="btn btn-secondary" type="button" data-toggle="collapse">
-        <span>Close Map</span>
-      </button>
-      <span id='mapInfo'>
-        Click a point to update station
-      </span>
+      <div>
+        <button class="btn btn-secondary" type="button" data-toggle="collapse">
+          <span>Close Map</span>
+        </button>
+        <span id='mapInfo'>
+          Click a point to update station
+        </span>
+      </div>
+      <!-- <div id="otherstn">
+        <span class="citytexts">San Juan, PR (SJU)</span>
+        <span> | </span>
+        <span class="citytexts">Guam (GUM)</span>
+        <span> | </span>
+        <span class="citytexts">Pago Pago (STU)</span>
+      </div> -->
+      
       <svg viewBox="0 0 975 610">
       </svg>
     </div>
@@ -490,6 +500,7 @@
                   <option value="GRB">Green Bay, WI</option>
                   <option value="GSO">Greensboro, NC</option>
                   <option value="GYX">Gray, ME</option>
+                  <option value="GUM" class="no-mix">Guam</option>
                   <option value="INL">International Falls, MN</option>
                   <option value="JAN">Jackson, MS</option>
                   <option value="JAX">Jacksonville, FL</option>
@@ -507,6 +518,7 @@
                   <option value="LBF">North Platte, NE</option>
                   <option value="OAK">Oakland, CA</option>
                   <option value="OAX">Omaha, NE</option>
+                  <option value="STU" class="no-mix">Pago Pago</option>
                   <option value="FFC">Peachtree City, GA</option>
                   <option value="PIT">Pittsburgh, PA</option>
                   <option value="UIL">Quillayute, WA</option>
@@ -516,6 +528,7 @@
                   <option value="SLE">Salem, OR</option>
                   <option value="SLC">Salt Lake City, UT</option>
                   <option value="NKX">San Diego, CA</option>
+                  <option value="SJU" class="no-mix">San Juan, PR</option>
                   <option value="SHV">Shreveport, LA</option>
                   <option value="LIX">Slidell, LA</option>
                   <option value="OTX">Spokane, WA</option>
