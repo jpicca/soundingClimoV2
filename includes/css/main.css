@@ -171,7 +171,7 @@ label { margin-bottom: 0; margin-top: 0;}
 .citytext {
   text-anchor: middle;
   fill: black;
-  font-size: 1rem;
+  font-size: 0.8rem;
   stroke-width: 0px;
 }
 

@@ -529,6 +529,10 @@ class hexChart {
 
                     resolve();
 
+                })
+                .catch(err => {
+                  // console.error(err);
+                  reject();
                 });
 
             });
@@ -920,8 +924,13 @@ async function updateHex(chart) {
   container.select('#hexDat span').text('Sampled Data (Click/Tap Bin for Counts)')
 
   chart.updateParms();
-  await chart.prepData();
-  chart.updateFunctions().makePlot();
+  await chart.prepData()
+              .then(() => {chart.updateFunctions().makePlot();})
+              .catch(err => {
+      $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
+      console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
+    });
+  // chart.updateFunctions().makePlot();
 
   // Hide 'building' window
   $('#hex-build').hide()
