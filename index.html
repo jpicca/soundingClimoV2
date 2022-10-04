@@ -50,12 +50,22 @@
     </nav>
 
     <div id='map-container'>
-      <button class="btn btn-secondary" type="button" data-toggle="collapse">
-        <span>Close Map</span>
-      </button>
-      <span id='mapInfo'>
-        Click a point to update station
-      </span>
+      <div>
+        <button class="btn btn-secondary" type="button" data-toggle="collapse">
+          <span>Close Map</span>
+        </button>
+        <span id='mapInfo'>
+          Click a point to update station
+        </span>
+      </div>
+      <!-- <div id="otherstn">
+        <span class="citytexts">San Juan, PR (SJU)</span>
+        <span> | </span>
+        <span class="citytexts">Guam (GUM)</span>
+        <span> | </span>
+        <span class="citytexts">Pago Pago (STU)</span>
+      </div> -->
+      
       <svg viewBox="0 0 975 610">
       </svg>
     </div>
@@ -462,6 +472,9 @@
                   <option value="ABR">Aberdeen, SD</option>
                   <option value="ALB">Albany, NY</option>
                   <option value="AMA">Amarillo, TX</option>
+                  <option value="ANC" class="no-mix">Anchorage, AK</option>
+                  <option value="ANT" class="no-mix">Annette, AK</option>
+                  <option value="ABE" class="no-mix">Bethel, AK</option>
                   <option value="BIS">Bismarck, ND</option>
                   <option value="BMX">Birmingham, AL</option>
                   <option value="RNK">Blacksburg, VA</option>
@@ -473,6 +486,7 @@
                   <option value="MPX">Chanhassen, MN</option>
                   <option value="CHH">Chatham, MA</option>
                   <option value="CHS">Charleston, SC</option>
+                  <option value="ACD" class="no-mix">Cold Bay, AK</option>
                   <option value="CRP">Corpus Christi, TX</option>
                   <option value="DDC">Dodge City, KS</option>
                   <option value="DRT">Del Rio, TX</option>
@@ -481,6 +495,7 @@
                   <option value="DVN">Davenport, IA</option>
                   <option value="LKN">Elko, NV</option>
                   <option value="ELP">El Paso, TX</option>
+                  <option value="AFA" class="no-mix">Fairbanks, AK</option>
                   <option value="FGZ">Flagstaff, AZ</option>
                   <option value="FWD">Fort Worth, TX</option>
                   <option value="APX">Gaylord, MI</option>
@@ -490,23 +505,30 @@
                   <option value="GRB">Green Bay, WI</option>
                   <option value="GSO">Greensboro, NC</option>
                   <option value="GYX">Gray, ME</option>
+                  <option value="GUM" class="no-mix">Guam</option>
                   <option value="INL">International Falls, MN</option>
                   <option value="JAN">Jackson, MS</option>
                   <option value="JAX">Jacksonville, FL</option>
                   <option value="KEY">Key West, FL</option>
+                  <option value="AKN" class="no-mix">King Salmon, AK</option>
+                  <option value="ADQ" class="no-mix">Kodiak, AK</option>
+                  <option value="AOT" class="no-mix">Kotzebue, AK</option>
                   <option value="LCH">Lake Charles, LA</option>
                   <option value="VEF">Las Vegas, NV</option>
                   <option value="ILX">Lincoln, IL</option>
                   <option value="LZK">Little Rock, AR</option>
+                  <option value="AMC" class="no-mix">McGrath, AK</option>
                   <option value="MFR">Medford, OR</option>
                   <option value="MFL">Miami, FL</option>
                   <option value="MAF">Midland, TX</option>
                   <option value="BNA">Nashville, TN</option>
                   <option value="MHX">Newport, NC</option>
+                  <option value="AOM" class="no-mix">Nome, AK</option>
                   <option value="OUN" selected="selected">Norman, OK</option>
                   <option value="LBF">North Platte, NE</option>
                   <option value="OAK">Oakland, CA</option>
                   <option value="OAX">Omaha, NE</option>
+                  <option value="STU" class="no-mix">Pago Pago</option>
                   <option value="FFC">Peachtree City, GA</option>
                   <option value="PIT">Pittsburgh, PA</option>
                   <option value="UIL">Quillayute, WA</option>
@@ -516,19 +538,23 @@
                   <option value="SLE">Salem, OR</option>
                   <option value="SLC">Salt Lake City, UT</option>
                   <option value="NKX">San Diego, CA</option>
+                  <option value="SJU" class="no-mix">San Juan, PR</option>
                   <option value="SHV">Shreveport, LA</option>
                   <option value="LIX">Slidell, LA</option>
                   <option value="OTX">Spokane, WA</option>
                   <option value="SGF">Springfield, MO</option>
                   <option value="IAD">Sterling, VA</option>
+                  <option value="ASN" class="no-mix">St. Paul, AK</option>
                   <option value="TLH" class="no-mix">Tallahassee, FL</option>
                   <option value="TBW">Tampa Bay, FL</option>
                   <option value="TOP">Topeka, KS</option>
                   <option value="TUS">Tucson, AZ</option>
                   <option value="OKX">Upton, NY</option>
+                  <option value="ABR" class="no-mix">Utqiagvik (Barrow), AK</option>
                   <option value="VBG">Vandenberg, CA</option>
                   <option value="WAL">Wallops Island, VA</option>
                   <option value="ILN">Wilmington, OH</option>
+                  <option value="AYA" class="no-mix">Yakutat, AK</option>
                   <option value="YUM" class="no-mix">Yuma, AZ</option>
                 </select>
               </div>

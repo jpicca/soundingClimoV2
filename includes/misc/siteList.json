@@ -1,5 +1,113 @@
 {"sites": [
     {
+        "site": "San Juan",
+        "ID": "SJU",
+        "coordinates": [],
+        "details": ""
+    },
+    {
+        "site": "Guam",
+        "ID": "GUM",
+        "coordinates": [],
+        "details": ""
+    },
+    {
+        "site": "Pago Pago",
+        "ID": "STU",
+        "coordinates": [],
+        "details": ""
+    },
+    {
+        "site": "Anchorage, AK",
+        "ID": "ANC",
+        "coordinates": [61.2176,-149.8997],
+        "details": ""
+    },
+    {
+        "site": "King Salmon, AK",
+        "ID": "AKN",
+        "coordinates": [58.6887,-156.6628],
+        "details": ""
+    },
+    {
+        "site": "Bethel, AK",
+        "ID": "ABE",
+        "coordinates": [60.7943,-161.7694],
+        "details": ""
+    },
+    {
+        "site": "St. Paul, AK",
+        "ID": "ASN",
+        "coordinates": [57.1208,-170.283],
+        "details": ""
+    },
+    {
+        "site": "Utqiagvik/Barrow, AK",
+        "ID": "ABR",
+        "coordinates": [71.2906,-156.7886],
+        "details": ""
+    },
+    {
+        "site": "Cold Bay, AK",
+        "ID": "ACD",
+        "coordinates": [55.2063,-162.7174],
+        "details": ""
+    },
+    {
+        "site": "Kodiak, AK",
+        "ID": "ADQ",
+        "coordinates": [57.7900,-152.4072],
+        "details": ""
+    },
+    {
+        "site": "Fairbanks, AK",
+        "ID": "AFA",
+        "coordinates": [64.8401,-147.7200],
+        "details": ""
+    },
+    {
+        "site": "McGrath, AK",
+        "ID": "AMC",
+        "coordinates": [62.9560,-155.5989],
+        "details": ""
+    },
+    {
+        "site": "Annette, AK",
+        "ID": "ANT",
+        "coordinates": [55.1209,-131.4855],
+        "details": ""
+    },
+    {
+        "site": "Nome, AK",
+        "ID": "AOM",
+        "coordinates": [64.5006,-165.4086],
+        "details": ""
+    },
+    {
+        "site": "Kotzebue, AK",
+        "ID": "AOT",
+        "coordinates": [66.8969,-162.5931],
+        "details": ""
+    },
+    {
+        "site": "Yakutat, AK",
+        "ID": "AYA",
+        "coordinates": [59.5453,-139.7268],
+        "details": ""
+    },
+    {
+        "site": "Hilo, HI",
+        "ID": "HTO",
+        "coordinates": [19.7216,-155.0849],
+        "details": ""
+    },
+    {
+        "site": "Lihue, HI",
+        "ID": "HLI",
+        "coordinates": [21.9742,-159.3673],
+        "details": ""
+    },
+    {
         "site": "Fort Worth, TX",
         "ID": "FWD",
         "coordinates": [32.834,-97.298],
