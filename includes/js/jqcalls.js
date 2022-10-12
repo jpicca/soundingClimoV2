@@ -35,7 +35,6 @@ function stationChange() {
 $("#n_vals").on("change", maxMinVal);
 
 function maxMinVal() {
-  // console.log(+$('#n_vals').val())
 
   if (isNaN(+$('#n_vals').val())) { +$('#n_vals').val(5) }
 
@@ -97,7 +96,6 @@ function parmChange() {
   }
 
   // Clear any locked/highlighted data
-  // clearLock();
   updateSoundTime();
 
   // Clear the y-axis input boxes
@@ -187,16 +185,15 @@ $("#showinfo").on("click", function() {
   window.open('climoplotinfo.html', 'HELP', "width=800, height=600, top=100, left=300");
 });
 
-// The checkbox for plotting observations is controlled in the main.js file.
-// This is because this routine must be called after the plotObs function is defined.
-
 // Map controls
 $('#map-container button').on("click", () => {
-  $('#map-container').hide();
+  // $('#map-container').hide();
+  $('#map-container').css('visibility','hidden');
 })
 
 $('#showMap').on("click", () => {
-  $('#map-container').show();
+  // $('#map-container').show();
+  $('#map-container').css('visibility','visible');
 })
 
 // hex chart controls
@@ -212,44 +209,34 @@ $('#month-min').on("change", () => {
 
   // Update the day menu
   if (["04","06","09","11"].includes(month)) { 
-    
     sel.select('option[value="31"]').property('disabled',true);
   } else if (month == "02") {
-    
     sel.select('option[value="31"]').property('disabled',true);
     sel.select('option[value="30"]').property('disabled',true);
   } else {
-
     sel.selectAll('option').property('disabled',false);
   }
 
 })
 
 $('#month-max').on("change", () => {
-  
   // Get value of month
   let month = d3.select("#month-max").property('value')
   let sel = d3.select('#day-max')
 
   // Update the day menu
-  if (["04","06","09","11"].includes(month)) { 
-    
+  if (["04","06","09","11"].includes(month)) {   
     sel.select('option[value="31"]').property('disabled',true);
   } else if (month == "02") {
-    
     sel.select('option[value="31"]').property('disabled',true);
     sel.select('option[value="30"]').property('disabled',true);
   } else {
-
     sel.selectAll('option').property('disabled',false);
   }
-
 })
 
 $('#chartBtn').on("click", () => {
-
   $('#chart-container').show();
-    
 });
 
 $('#hexobsBtn').on("click", () => {
@@ -259,7 +246,6 @@ $('#hexobsBtn').on("click", () => {
   if (circles.empty()) {
     alert('No current data available to plot for this station/parameter combination.')
   } else {
-
     if (circles.style('visibility') == 'visible') {
       circles.style('visibility', 'hidden')
     } else {

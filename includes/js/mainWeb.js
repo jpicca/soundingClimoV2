@@ -1,3 +1,5 @@
+// import {makeMap} from './mapping.js'
+
 // Create a global variable for our hexchart
 // Don't instantiate it until the doc is ready though
 var hexchart, dm, chart, chart2, chart3, chart4, chart5,
@@ -304,15 +306,12 @@ class tabChart {
 
     dcChart.width(this.width)
         .dimension(dim)
-        //.size(5)
         .size(+$('#n_vals').val())
         .order(ordering)
         .columns([
-          //'date',
           {
             label: 'Date',
             format: d => {
-              // let formatter = d3.timeFormat("%b %d, %Y (%HZ)")
               let formatter = d3.timeFormat("%m/%d/%Y (%HZ)")
               return formatter(d.date)
             }
@@ -344,7 +343,6 @@ function finishedFormat() {
 function highlighting() {
 
   // Set up tooltip
-  
   let circles = d3.selectAll('.dot')
   let formatter = d3.timeFormat("%b %d (%HZ)")
   let date;
@@ -390,7 +388,6 @@ function highlighting() {
       instruct.classed('locked',true);
 
       // Clear the data lock but prevent the click from scrolling to the top of the page
-
       $('#instruction a').click(function(e) { clearLock(); e.preventDefault(); })
 
     });
@@ -930,7 +927,6 @@ async function updateHex(chart) {
       $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
       console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
     });
-  // chart.updateFunctions().makePlot();
 
   // Hide 'building' window
   $('#hex-build').hide()
@@ -971,5 +967,7 @@ $(window).ready(function() {
   updateHex(hexchart);
 
   updatePOR();
+
+  makeMap();
 
 })

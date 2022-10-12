@@ -1,119 +1,122 @@
 // This file contains code for the overlay map
 
-d3.json('./includes/misc/counties-albers-10m.json').then(function(us) {
+function makeMap() {
 
-    var path = d3.geoPath()
-    
-    var projection = d3.geoAlbersUsa().scale(1300).translate([487.5, 305])
+    // let zoom, center;
 
-    var standardR = 7;
+    // function checkMatch(x) {
+    //     if (x.matches) { // If media query matches
+    //         zoom = 1;
+    //         center = [39.8283, -98.5795];
+    //       } else {
+    //         zoom = 2;
+    //         center = [26.9944,-25.9722];
+    //       }
+    // }
 
-    d3.select('#map-container svg').html(`
-        <g fill="none" stroke="#000" stroke-linejoin="round" stroke-linecap="round">
-        <path stroke="#aaa" stroke-width="0.5" d="${path(topojson.mesh(us, us.objects.counties, (a, b) => a !== b && (a.id / 1000 | 0) === (b.id / 1000 | 0)))}"></path>
-        <path stroke-width="0.5" d="${path(topojson.mesh(us, us.objects.states, (a, b) => a !== b))}"></path>
-        <path d="${path(topojson.feature(us, us.objects.nation))}"></path>
-        </g>`)
+    function formatSites(list) {
+        return new Promise((resolve,reject) => {
 
+            var geojson = [];
+                    
+            list.forEach(function(point){
+                var lat = point.coordinates[1]
+                var lon = point.coordinates[0]
 
-    d3.json("./includes/misc/siteList.json").then(function(collection) {
-
-        function updateClass(selection) {
-            selection.classed('selSite',true);
-        }
-        
-        var mapG = d3.select('#map-container').select('g')
-        
-        let citypoints = mapG.selectAll(".citypoints")
-            .data(collection.sites)
-            .join("circle")
-            .style("stroke", "black")  
-            .style("opacity", .6) 
-            .style("fill", "black")
-            .classed('citypoints',true)
-            .attr('id', d => d.ID)
-            .classed('selSite', d => {
-                if (d.ID == 'OUN') {
-                    return true;
-                } else {
-                    return false;
-                }
-            })
-            .attr("r", standardR)
-            .attr("cx",
-                d => {
-                    if (d.ID == 'SJU') {
-                        return 750;
-                    } else if (d.ID == 'GUM') {
-                        return 750;
-                    } else if (d.ID == 'STU') {
-                        return 750;
-                    } else {
-                        return projection([d.coordinates[1],d.coordinates[0]])[0]
+                var feature = {type: 'Feature',
+                    properties: point,
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [lat,lon]
                     }
-                })
-            .attr("cy",
-                d => {
-                    if (d.ID == 'SJU') {
-                        return 30;
-                    } else if (d.ID == 'GUM') {
-                        return 80;
-                    } else if (d.ID == 'STU') {
-                        return 130;
-                    } else {
-                        return projection([d.coordinates[1],d.coordinates[0]])[1]
-                    }
-                })
-            
-        mapG.append("text")
-            .attr('class','citytext')
-            .text('San Juan')
-            .attr("x", 750)
-            .attr("y", 55)
-
-        mapG.append("text")
-            .attr('class','citytext')
-            .text('Guam')
-            .attr("x", 750)
-            .attr("y", 105)
-
-        mapG.append("text")
-            .attr('class','citytext')
-            .text('Pago Pago')
-            .attr("x", 750)
-            .attr("y", 155)
-            
-        citypoints.on('click', d => {
-
-            // Remove animation from prior selected
-            d3.select('.selSite').classed('selSite',false);
-
-            // Add animation to this selected element
-            // Don't ask me why d3.select(this) returns the whole window element...
-            // but it does, so this is a workaround
-            // Guessing there's a conflict with jquery somehow
-            d3.select(`#${d.ID}`).classed('selSite',true);
-            
-            // Update selected station in dropdown menu
-            $('#stn').val(d.ID);
-
-            // Hide map
-            $('#map-container').hide();
-
-            // Run station updater
-            stationChange();
-
+                };
+                
+                geojson.push(feature);
+            });    
+            resolve(geojson);
         })
+    }
 
-        // Make the circle big on mouseover
-        citypoints.on('mouseover', d => {
-            d3.select(`#${d.ID}`).attr('r',15)
-        })
+    // Check window size
+    let match = window.matchMedia("(max-width: 700px)")
 
-        // Make the circle small on mouseout
-        citypoints.on('mouseout', d => {
-            d3.select(`#${d.ID}`).attr('r',standardR)
-        })
+    // checkMatch(match)
 
+    // Initialize leaflet map
+    let map = L.map('lmap', {
+        // center: center,
+        // zoom: zoom
     });
-});
+
+    L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo( map );
+
+    d3.json("./includes/misc/siteList.json").then(async function(collection) {
+        let geojson = await formatSites(collection.sites)
+
+        let siteGroup = L.geoJson(geojson,
+            {
+                pointToLayer: function (feature,latlng) {
+                    return L.circleMarker(latlng, {
+                        radius: 8,
+                        fillColor: "#ff7800",
+                        color: "#000",
+                        weight: 1
+                    })
+                },
+                onEachFeature: onEachFeature
+            }
+        ).addTo(map);
+
+        map.fitBounds(siteGroup.getBounds());
+    });
+
+    let info = L.control({position: 'topright'});
+    info.onAdd = function(map) {
+        this._div = L.DomUtil.create('div','info')
+        this.update();
+        return this._div;
+    }
+    info.update = function(props) {
+        this._div.innerHTML = `<h6> Sounding Site: </h6> ` + 
+            (props ? `${props.ID} (${props.site})` : 'Hover over a site');
+    }
+    info.addTo(map);
+
+    function onEachFeature(feature, layer) {
+        layer.on({
+            mouseover: highlightFeature,
+            mouseout: resetHighlight,
+            click: selectFeature
+        });
+    }
+
+    function highlightFeature(e) {
+        var layer = e.target;
+        
+        info.update(e.target.feature.properties)
+        layer.setStyle({
+            weight: 5
+        });
+    }
+
+    function resetHighlight(e) {
+
+        info.update()
+        var layer = e.target;
+        layer.setStyle({
+            weight: 1
+        })
+    }
+
+    function selectFeature(e) {
+
+        let ID = e.target.feature.properties.ID;
+        $('#stn').val(ID);
+        info.update(e.target.feature.properties);
+        stationChange();
+
+    }
+
+}

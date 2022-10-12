@@ -4,9 +4,11 @@
   <title>Storm Prediction Center Sounding Climatology Page</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
   <link rel="stylesheet" type="text/css" href="includes/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="includes/css/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
 
   <!-- GSA-sanctioned Google Analytics -->
   <script type="text/javascript" async="true" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=DOC&subagency=SPC&pua=UA-52727918-1"></script>
@@ -50,24 +52,14 @@
     </nav>
 
     <div id='map-container'>
-      <div>
+      <div id="map-options">
         <button class="btn btn-secondary" type="button" data-toggle="collapse">
           <span>Close Map</span>
         </button>
-        <span id='mapInfo'>
-          Click a point to update station
-        </span>
       </div>
-      <!-- <div id="otherstn">
-        <span class="citytexts">San Juan, PR (SJU)</span>
-        <span> | </span>
-        <span class="citytexts">Guam (GUM)</span>
-        <span> | </span>
-        <span class="citytexts">Pago Pago (STU)</span>
-      </div> -->
-      
-      <svg viewBox="0 0 975 610">
-      </svg>
+      <div id="lmap" class='col-lg-12'>
+
+      </div>
     </div>
 
     <!-- Adding hexbin chart -->
@@ -468,13 +460,11 @@
                 <label class="style5" for="stn">Select Station</label>
                 <br />
                 <select id="stn">
+                  <option value="PASS" disabled>---Continental US---</option>
                   <option value="ABQ">Albuquerque, NM</option>
                   <option value="ABR">Aberdeen, SD</option>
                   <option value="ALB">Albany, NY</option>
                   <option value="AMA">Amarillo, TX</option>
-                  <option value="ANC" class="no-mix">Anchorage, AK</option>
-                  <option value="ANT" class="no-mix">Annette, AK</option>
-                  <option value="ABE" class="no-mix">Bethel, AK</option>
                   <option value="BIS">Bismarck, ND</option>
                   <option value="BMX">Birmingham, AL</option>
                   <option value="RNK">Blacksburg, VA</option>
@@ -486,7 +476,6 @@
                   <option value="MPX">Chanhassen, MN</option>
                   <option value="CHH">Chatham, MA</option>
                   <option value="CHS">Charleston, SC</option>
-                  <option value="ACD" class="no-mix">Cold Bay, AK</option>
                   <option value="CRP">Corpus Christi, TX</option>
                   <option value="DDC">Dodge City, KS</option>
                   <option value="DRT">Del Rio, TX</option>
@@ -495,7 +484,6 @@
                   <option value="DVN">Davenport, IA</option>
                   <option value="LKN">Elko, NV</option>
                   <option value="ELP">El Paso, TX</option>
-                  <option value="AFA" class="no-mix">Fairbanks, AK</option>
                   <option value="FGZ">Flagstaff, AZ</option>
                   <option value="FWD">Fort Worth, TX</option>
                   <option value="APX">Gaylord, MI</option>
@@ -510,20 +498,15 @@
                   <option value="JAN">Jackson, MS</option>
                   <option value="JAX">Jacksonville, FL</option>
                   <option value="KEY">Key West, FL</option>
-                  <option value="AKN" class="no-mix">King Salmon, AK</option>
-                  <option value="ADQ" class="no-mix">Kodiak, AK</option>
-                  <option value="AOT" class="no-mix">Kotzebue, AK</option>
                   <option value="LCH">Lake Charles, LA</option>
                   <option value="VEF">Las Vegas, NV</option>
                   <option value="ILX">Lincoln, IL</option>
                   <option value="LZK">Little Rock, AR</option>
-                  <option value="AMC" class="no-mix">McGrath, AK</option>
                   <option value="MFR">Medford, OR</option>
                   <option value="MFL">Miami, FL</option>
                   <option value="MAF">Midland, TX</option>
                   <option value="BNA">Nashville, TN</option>
                   <option value="MHX">Newport, NC</option>
-                  <option value="AOM" class="no-mix">Nome, AK</option>
                   <option value="OUN" selected="selected">Norman, OK</option>
                   <option value="LBF">North Platte, NE</option>
                   <option value="OAK">Oakland, CA</option>
@@ -544,18 +527,64 @@
                   <option value="OTX">Spokane, WA</option>
                   <option value="SGF">Springfield, MO</option>
                   <option value="IAD">Sterling, VA</option>
-                  <option value="ASN" class="no-mix">St. Paul, AK</option>
                   <option value="TLH" class="no-mix">Tallahassee, FL</option>
                   <option value="TBW">Tampa Bay, FL</option>
                   <option value="TOP">Topeka, KS</option>
                   <option value="TUS">Tucson, AZ</option>
                   <option value="OKX">Upton, NY</option>
-                  <option value="ABR" class="no-mix">Utqiagvik (Barrow), AK</option>
                   <option value="VBG">Vandenberg, CA</option>
                   <option value="WAL">Wallops Island, VA</option>
                   <option value="ILN">Wilmington, OH</option>
-                  <option value="AYA" class="no-mix">Yakutat, AK</option>
                   <option value="YUM" class="no-mix">Yuma, AZ</option>
+                  <option value="PASS" disabled>---Alaska---</option>
+                  <option value="ANC" class="no-mix">Anchorage, AK</option>
+                  <option value="ANT" class="no-mix">Annette, AK</option>
+                  <option value="ABE" class="no-mix">Bethel, AK</option>
+                  <option value="ACD" class="no-mix">Cold Bay, AK</option>
+                  <option value="AFA" class="no-mix">Fairbanks, AK</option>
+                  <option value="AKN" class="no-mix">King Salmon, AK</option>
+                  <option value="ADQ" class="no-mix">Kodiak, AK</option>
+                  <option value="AOT" class="no-mix">Kotzebue, AK</option>
+                  <option value="AMC" class="no-mix">McGrath, AK</option>
+                  <option value="AOM" class="no-mix">Nome, AK</option>
+                  <option value="ASN" class="no-mix">St. Paul, AK</option>
+                  <option value="ABR" class="no-mix">Utqiagvik (Barrow), AK</option>
+                  <option value="AYA" class="no-mix">Yakutat, AK</option>
+                  <option value="PASS" disabled>---Pacific & Puerto Rico---</option>
+                  <option value="GUM" class="no-mix">Guam</option>
+                  <option value="HTO" class="no-mix">Hilo, HI</option>
+                  <option value="HLI" class="no-mix">Lihue, HI</option>
+                  <option value="STU" class="no-mix">Pago Pago, AS</option>
+                  <option value="SJU" class="no-mix">San Juan, PR</option>
+                  <option value="PASS" disabled>---Canada---</option>
+                  <option value="YBK" class="no-mix">Baker Lake, NT</option>
+                  <option value="YCB" class="no-mix">Cambridge Bay, NT</option>
+                  <option value="YZS" class="no-mix">Coral Harbour, NT</option>
+                  <option value="YYQ" class="no-mix">Churchill, MB</option>
+                  <option value="WSE" class="no-mix">Edmonton, AB</option>
+                  <option value="YYE" class="no-mix">Fort Nelson, BC</option>
+                  <option value="YSM" class="no-mix">Fort Smith, NT</option>
+                  <option value="YFB" class="no-mix">Frobisher Bay, NT</option>
+                  <option value="YVP" class="no-mix">Goose Bay, NL</option>
+                  <option value="YUX" class="no-mix">Hall Beach, NU</option>
+                  <option value="WPH" class="no-mix">Inukjuak, QC</option>
+                  <option value="YEV" class="no-mix">Inuvik, NT</option>
+                  <option value="YLW" class="no-mix">Kelowna, BC</option>
+                  <option value="YVP" class="no-mix">Kuujjuaq, QC</option>
+                  <option value="YAH" class="no-mix">La Grande, QC</option>
+                  <option value="WMW" class="no-mix">Maniwaki, QC</option>
+                  <option value="YMO" class="no-mix">Moosonee, ON</option>
+                  <option value="YVQ" class="no-mix">Norman Wells, NT</option>
+                  <option value="WPL" class="no-mix">Pickle Lake, ON</option>
+                  <option value="YZT" class="no-mix">Port Hardy, BC</option>
+                  <option value="ZXS" class="no-mix">Prince George, BC</option>
+                  <option value="YRB" class="no-mix">Resolute, NT</option>
+                  <option value="WSA" class="no-mix">Sable Island, NS</option>
+                  <option value="YZV" class="no-mix">Sept-Iles, QC</option>
+                  <option value="YJT" class="no-mix">Stephenville, NL</option>
+                  <option value="YQD" class="no-mix">The Pas, MB</option>
+                  <option value="YXY" class="no-mix">Whitehorse, YT</option>
+                  <option value="YQT" class="no-mix">Yarmouth, NS</option>
                 </select>
               </div>
             </li>
@@ -808,8 +837,6 @@
                 <div class='row'>
                   <div class='row col-lg-12'>
                     <span class='table-title' style="margin-bottom: 0.5rem;">Selected Time Range Max/Min</span>
-                    <!-- <label class='table-title' for="n_vals">Number of Values to Show</label>
-                    <input type="text" name="n_vals" id="n_vals" size="5" /> -->
                   </div>
                   <div class='row col-lg-12'>
                     <label id='nval-inst' for="n_vals">Number of Soundings to Show: </label>
@@ -852,6 +879,10 @@
   <script src="includes/js/parmHelper.js"></script>
   <script src="includes/js/mainWeb.js"></script>
   <script src="includes/js/mapping.js"></script>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
 
   <script>
 
