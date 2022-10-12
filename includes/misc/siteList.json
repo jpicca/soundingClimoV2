@@ -1,20 +1,188 @@
 {"sites": [
     {
-        "site": "San Juan",
+        "site": "Port Hardy, BC",
+        "ID": "YZT",
+        "coordinates": [50.6838,-127.3772],
+        "details": ""
+    },
+    {
+        "site": "Kelowna, BC",
+        "ID": "YLW",
+        "coordinates": [49.9569,-119.3787],
+        "details": ""
+    },
+    {
+        "site": "Prince George, BC",
+        "ID": "ZXS",
+        "coordinates": [53.88,-122.68],
+        "details": ""
+    },
+    {
+        "site": "Fort Nelson, BC",
+        "ID": "YYE",
+        "coordinates": [58.83, -122.60],
+        "details": ""
+    },
+    {
+        "site": "Fort Smith, NT",
+        "ID": "YSM",
+        "coordinates": [60.03, -111.93],
+        "details": ""
+    },
+    {
+        "site": "Edmonton, AB",
+        "ID": "WSE",
+        "coordinates": [53.55, -114.10],
+        "details": ""
+    },
+    {
+        "site": "The Pas, MB",
+        "ID": "YQD",
+        "coordinates": [53.97, -101.10],
+        "details": ""
+    },
+    {
+        "site": "Churchill, MB",
+        "ID": "YYQ",
+        "coordinates": [58.75, -94.07],
+        "details": ""
+    },
+    {
+        "site": "Pickle Lake, ON",
+        "ID": "WPL",
+        "coordinates": [51.47, -90.20],
+        "details": ""
+    },
+    {
+        "site": "Moosonee, ON",
+        "ID": "YMO",
+        "coordinates": [51.27, -80.65],
+        "details": ""
+    },
+    {
+        "site": "Maniwaki, QC",
+        "ID": "WMW",
+        "coordinates": [46.38, -75.97],
+        "details": ""
+    },
+    {
+        "site": "La Grande, QC",
+        "ID": "YAH",
+        "coordinates": [53.75, -73.67],
+        "details": ""
+    },
+    {
+        "site": "Inukjuak, QC",
+        "ID": "WPH",
+        "coordinates": [58.45, -78.12],
+        "details": ""
+    },
+    {
+        "site": "Kuujjuaq, QC",
+        "ID": "YVP",
+        "coordinates": [58.10, -68.42],
+        "details": ""
+    },
+    {
+        "site": "Sept-Iles, QC",
+        "ID": "YZV",
+        "coordinates": [50.22,-66.27],
+        "details": ""
+    },
+    {
+        "site": "Goose Bay, NL",
+        "ID": "YVP",
+        "coordinates": [53.32, -60.42],
+        "details": ""
+    },
+    {
+        "site": "Stephenville, NL",
+        "ID": "YJT",
+        "coordinates": [48.53,-58.55],
+        "details": ""
+    },
+    {
+        "site": "Yarmouth, NS",
+        "ID": "YQT",
+        "coordinates": [43.83,-66.08],
+        "details": ""
+    },
+    {
+        "site": "Sable Island, NS",
+        "ID": "WSA",
+        "coordinates": [43.93, -60.02],
+        "details": ""
+    },
+    {
+        "site": "Hall Beach, NU",
+        "ID": "YUX",
+        "coordinates": [68.78, -81.25],
+        "details": ""
+    },
+    {
+        "site": "Whitehorse, YT",
+        "ID": "YXY",
+        "coordinates": [60.72, -135.07],
+        "details": ""
+    },
+    {
+        "site": "Inuvik, NT",
+        "ID": "YEV",
+        "coordinates": [68.30, -133.47],
+        "details": ""
+    },
+    {
+        "site": "Norman Wells, NT",
+        "ID": "YVQ",
+        "coordinates": [65.28, -126.80],
+        "details": ""
+    },
+    {
+        "site": "Cambridge Bay, NT",
+        "ID": "YCB",
+        "coordinates": [69.09, -105.12],
+        "details": ""
+    },
+    {
+        "site": "Baker Lake, NT",
+        "ID": "YBK",
+        "coordinates": [64.30,-96.00],
+        "details": ""
+    },
+    {
+        "site": "Coral Harbour, NT",
+        "ID": "YZS",
+        "coordinates": [64.20, -83.37],
+        "details": ""
+    },
+    {
+        "site": "Resolute, NT",
+        "ID": "YRB",
+        "coordinates": [74.72, -94.98],
+        "details": ""
+    },
+    {
+        "site": "Frobisher Bay, NT",
+        "ID": "YFB",
+        "coordinates": [63.75,-68.55],
+        "details": ""
+    },
+    {
+        "site": "San Juan, PR",
         "ID": "SJU",
-        "coordinates": [],
+        "coordinates": [18.4313,-65.9923],
         "details": ""
     },
     {
         "site": "Guam",
         "ID": "GUM",
-        "coordinates": [],
+        "coordinates": [13.47794,144.7940],
         "details": ""
     },
     {
-        "site": "Pago Pago",
+        "site": "Pago Pago, AS",
         "ID": "STU",
-        "coordinates": [],
+        "coordinates": [-14.333,-170.7163],
         "details": ""
     },
     {

@@ -146,14 +146,6 @@ d3Edge.dataManager = function module() {
 
           d.index = i;
           d.date = parseDate(d.date);
-
-          // Coerce 03Z to 00Z and 15Z to 12Z
-          // if (d.date.getHours() == 3) {
-          //   d.date.setHours(0)
-          // } else if (d.date.getHours() == 15) {
-          //   d.date.setHours(12)
-          // }
-
           d.val = +d.val;
 
           // Create a 0-731 index to access quantile values
@@ -173,9 +165,6 @@ d3Edge.dataManager = function module() {
       //}).catch(err => { 
       }).catch(function(err) {
         alert('No data exist for this station/parameter combo!')
-
-        //exports.readData(exports.fileName());
-
         resolve();
       });
 
