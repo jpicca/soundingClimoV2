@@ -500,8 +500,6 @@ class hexChart {
                     data2 = data2.filter(d => +d.val > -9998)
                     data2 = data2.filter(d => (d.date.slice(0,2) > 65) || ((d.date.slice(0,2) < 35)))
 
-
-
                     let dataMap = {};
 
                     data1.forEach(entry => { 
@@ -596,7 +594,13 @@ class hexChart {
 
     async makePlot() {
 
+
         $('#hexLabel').html(`<b>All ${hexParm.station.toUpperCase()}</b> (Filtered)`)
+
+        // If we don't have any data to form hexbins, throw an error to reject promise
+        if (!Boolean(this.bins.length)) {
+          throw new Error('X and/or Y variables have no data to plot')
+        }
 
         let color = d3.scaleSequential(d3.interpolateBuPu)
                         .domain([0, d3.max(this.bins, d => d.length) / 1.25])
@@ -947,12 +951,26 @@ async function updateHex(chart) {
   container.select('#hexDat span').text('Sampled Data (Click/Tap Bin for Counts)')
 
   chart.updateParms();
+
   await chart.prepData()
-              .then(() => {chart.updateFunctions().makePlot();})
-              .catch(err => {
-      $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
-      console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
+  await chart.updateFunctions().makePlot().catch(err =>
+     {
+        // console.log(err)
+        $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
+        console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
     });
+
+  // await chart.prepData()
+  //             .then(() => {
+  //               chart.updateFunctions().makePlot();
+  //             })
+  //             .catch(err => {
+      
+  //     console.log('error!')
+      
+  //     $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
+  //     console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
+  //   });
 
   // Hide 'building' window
   $('#hex-build').hide()
