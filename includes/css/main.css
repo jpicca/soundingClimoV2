@@ -155,7 +155,7 @@ label { margin-bottom: 0; margin-top: 0;}
   width: 70%;
   height: 50%;
   left: 15%;
-  /* visibility: hidden; */
+  visibility: hidden;
   background-color: white;
   z-index: 201;
   opacity: 0.95;
