@@ -468,6 +468,9 @@ class hexChart {
 
         hexParm.files = [`./datafiles/${hexParm.station}/${hexParm.station}-${hexParm.parms[0]}-filtered.csv`,
     `./datafiles/${hexParm.station}/${hexParm.station}-${hexParm.parms[1]}-filtered.csv`]
+
+        // console.log(hexParm)
+
     }
 
     prepData() {
@@ -477,6 +480,8 @@ class hexChart {
                 .then(files => {
                     let data1 = files[0], data2 = files[1];
 
+                    // console.log(data1)
+
                     // If filter set for min/max values, filter em
                     if ($('#x-min').val()) { data1 = data1.filter(d => +d.val > $('#x-min').val())}
                     if ($('#x-max').val()) { data1 = data1.filter(d => +d.val < $('#x-max').val())}
@@ -484,14 +489,18 @@ class hexChart {
                     if ($('#y-min').val()) { data2 = data2.filter(d => +d.val > $('#y-min').val())}
                     if ($('#y-max').val()) { data2 = data2.filter(d => +d.val < $('#y-max').val())}
 
+                    // console.log(data1)
+
                     // Filter for missing data and dates before 1965
                     // Dates before 1965 occasionally have duplicate entries...
                     // Needs to be fixed upstream
                     data1 = data1.filter(d => +d.val > -9998)
-                    data1 = data1.filter(d => d.date.slice(0,2) > 65)
+                    data1 = data1.filter(d => (d.date.slice(0,2) > 65) || ((d.date.slice(0,2) < 35)))
 
                     data2 = data2.filter(d => +d.val > -9998)
-                    data2 = data2.filter(d => d.date.slice(0,2) > 65)
+                    data2 = data2.filter(d => (d.date.slice(0,2) > 65) || ((d.date.slice(0,2) < 35)))
+
+
 
                     let dataMap = {};
 
@@ -509,6 +518,9 @@ class hexChart {
 
                     // Final filter to ensure that we remove undefineds
                     this.data = data2.filter(d => d.val1);
+
+                    // console.log(data1)
+                    // console.log(this.data)
 
                     // Filtering user-entered dates
                     let minMon = $('#month-min').val(), maxMon = $('#month-max').val();
@@ -640,8 +652,10 @@ class hexChart {
         let curObsObj = dm.getObs();
         let obs00, obs12;
         let hex_obs = [];
+        // console.log(curObsObj)
 
         let keys = Object.keys(curObsObj);
+        // console.log(keys)
           
         keys.forEach(key => {
           if (key.slice(7,) == '0000') {
@@ -651,10 +665,17 @@ class hexChart {
           }
         })
 
+        // console.log(obs00)
+        // console.log(obs12)
+
         let xparm = document.getElementById('chrtXparam').value.toLowerCase()
         let yparm = document.getElementById('chrtYparam').value.toLowerCase()
+
+        // console.log(xparm)
+        // console.log(yparm)
         
         try {
+          // console.log(obs00)
           let xval_00 = obs00[xparm]
           let yval_00 = obs00[yparm]
 
@@ -663,12 +684,14 @@ class hexChart {
           }
 
         } catch (err) {
+          console.log(err)
           console.log('00z ob is missing for hexbin plotting')
         }
 
         try {
           let xval_12 = obs12[xparm]
           let yval_12 = obs12[yparm]
+          // console.log(xval_12)
 
           if (xval_12 && yval_12) {
             hex_obs.push({x: xval_12,y: yval_12,t: '12z'})
@@ -677,6 +700,9 @@ class hexChart {
         } catch (err) {
           console.log('12z ob is missing for hexbin plotting')
         }
+
+
+        // console.log(hex_obs)
 
         // hex_obs = [{x: xval_00,y: yval_00,t: '00z'}, {x: xval_12, y: yval_12, t: '12z'}]
         
