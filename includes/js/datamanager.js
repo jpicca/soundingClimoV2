@@ -165,7 +165,7 @@ d3Edge.dataManager = function module() {
       //}).catch(err => { 
       }).catch(function(err) {
         alert('No data exist for this station/parameter combo!')
-        resolve();
+        reject();
       });
 
     })

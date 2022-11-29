@@ -330,7 +330,8 @@ class tabChart {
 }
 
 // Functions for page transitions/loading/sampling
-function loadingFormat() {
+function loadingFormat(text='Preparing new data!') {
+  $("#loading-page h2 span").text(text)
   $("#svg-plot").css("opacity",0.1)
   $("#loading-page").css("display","block")
 }
@@ -338,6 +339,7 @@ function loadingFormat() {
 function finishedFormat() {
   $("#svg-plot").css("opacity",1)
   $("#loading-page").css("display","none")
+  $("#loading-page h2 span").text('Preparing new data!')
 }
 
 function highlighting() {
@@ -774,9 +776,20 @@ function updateSoundParmUnit() { dm.soundParmUnit($('#sndparam option:selected')
 // Update the data in the DataManager in async fashion
 async function updateData(init=true) {
 
-  // Await the resolution of the promise in readData before continuing
-  await dm.readData(dm.fileName());
+  var goAhead = true;
 
+  // Await the resolution of the promise in readData before continuing
+  await dm.readData(dm.fileName())
+          .catch(() => {
+            goAhead = false;
+          });
+
+  if (!goAhead) {
+    console.log('No data to read for building charts.')
+    loadingFormat('Please select new site.');
+    return;
+  }
+  
   // Read current obs (**the data for current obs are old**)
   await dm.readObs();
   dm.formatObs();
@@ -952,25 +965,29 @@ async function updateHex(chart) {
 
   chart.updateParms();
 
-  await chart.prepData()
-  await chart.updateFunctions().makePlot().catch(err =>
-     {
-        // console.log(err)
-        $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
-        console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
-    });
-
-  // await chart.prepData()
-  //             .then(() => {
-  //               chart.updateFunctions().makePlot();
-  //             })
-  //             .catch(err => {
-      
-  //     console.log('error!')
-      
+  // await chart.prepData().catch(err => 
+  //   {
   //     $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
-  //     console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
+
+
+
+  //   })
+  // await chart.updateFunctions().makePlot().catch(err =>
+  //    {
+  //       // console.log(err)
+  //       $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
+  //       console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
   //   });
+
+  await chart.prepData()
+              .then(() => {
+                chart.updateFunctions().makePlot();
+              })
+              .catch(err => {
+      
+      $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
+      console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
+    });
 
   // Hide 'building' window
   $('#hex-build').hide()
