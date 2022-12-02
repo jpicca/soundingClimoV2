@@ -1,5 +1,11 @@
 // Use this file for random helper variables
-var noMixSites = ['TLH','YUM']
+
+// Add sites that don't have mixing stats
+var noMixSites = [];
+$('.no-mix').each(function() {
+    let val = $(this).val();
+    noMixSites.push(val)
+});
 
 var parmParm = {
     'Precipitable Water (inches)': {

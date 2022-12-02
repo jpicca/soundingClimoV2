@@ -2,17 +2,6 @@
 
 function makeMap() {
 
-    // let zoom, center;
-
-    // function checkMatch(x) {
-    //     if (x.matches) { // If media query matches
-    //         zoom = 1;
-    //         center = [39.8283, -98.5795];
-    //       } else {
-    //         zoom = 2;
-    //         center = [26.9944,-25.9722];
-    //       }
-    // }
 
     function formatSites(list) {
         return new Promise((resolve,reject) => {
@@ -40,12 +29,8 @@ function makeMap() {
     // Check window size
     let match = window.matchMedia("(max-width: 700px)")
 
-    // checkMatch(match)
-
     // Initialize leaflet map
     let map = L.map('lmap', {
-        // center: center,
-        // zoom: zoom
     });
 
     L.tileLayer( 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

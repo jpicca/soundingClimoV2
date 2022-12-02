@@ -3,9 +3,10 @@
 // Create a global variable for our hexchart
 // Don't instantiate it until the doc is ready though
 var hexchart, dm, chart, chart2, chart3, chart4, chart5,
-    timeSeries, hist, range, maxTab, minTab;
+    timeSeries, hist, range, maxTab, minTab, yearHist;
 
 var margin = {top: 10, right: 20, bottom: 40, left: 40};
+var ybmargin = {top: 10, right: 20, bottom: 40, left: 40};
 var height = $(window).height()
 
 // Time series chart
@@ -14,7 +15,7 @@ class tsChart {
 
   // Create instance with variables
   constructor(width) {
-    this.width = width //- margin.left - margin.right;
+    this.width = width;
     this.title = "";
     this.ylabel = "";
   }
@@ -173,12 +174,55 @@ class tsChart {
   }
 }
 
+class ybChart {
+
+  constructor(width) {
+    this.width = width;
+    this.title = "";
+    this.ylabel = "";
+  }
+
+  // Set title of chart
+  setTitle(title) {
+    this.title = title;
+    return this;
+  }
+
+  setYLabel(ylabel) {
+    this.ylabel = ylabel;
+    return this;
+  }
+  
+  makeChart(dcChart,dim,group) {
+
+    dcChart.width(this.width)
+      .height(0.15*height)
+      .margins(ybmargin)
+      .mouseZoomable(false)
+      .dimension(dim)
+      .group(group)
+      .elasticY(true)
+      .yAxisLabel('# Obs')
+      .xAxisLabel('Years')
+      .x(d3.scaleLinear())
+      .elasticX(true)
+      .xAxis()
+      .tickFormat(d3.format('d'));
+
+    dcChart.yAxis().ticks(8);
+
+    dcChart.render();
+
+  }
+
+}
+
 // Parameter Distribution Bar Chart
 
 class bChart {
 
   constructor(width) {
-    this.width = width // - margin.left - margin.right;
+    this.width = width;
     this.title = "";
     this.ylabel = "";
   }
@@ -201,7 +245,7 @@ class bChart {
     let rangeVal = maxVal - minVal;
 
     dcChart.width(this.width)
-        .height(0.3*height)
+        .height(0.15*height)
         .margins(margin)
         .mouseZoomable(false)
         .dimension(dim)
@@ -215,16 +259,16 @@ class bChart {
         .yAxis()
         .tickFormat(d3.format("~s"));
 
-        dcChart.yAxis().ticks(8);
+    dcChart.yAxis().ticks(8);
 
-        if (rangeVal > 1000) {
-          dcChart.xAxis().tickFormat(d3.format("~s"));
-        } else {
-          dcChart.xAxis()
-              .tickFormat(d3.format(""))
-        }
+    if (rangeVal > 1000) {
+      dcChart.xAxis().tickFormat(d3.format("~s"));
+    } else {
+      dcChart.xAxis()
+          .tickFormat(d3.format(""))
+    }
 
-        dcChart.render();
+    dcChart.render();
 
   }
 
@@ -271,9 +315,9 @@ class rChart {
 
       });
 
-      dcChart.yAxis().ticks(3);
+    dcChart.yAxis().ticks(3);
 
-      dcChart.render();
+    dcChart.render();
   }
 
 }
@@ -330,7 +374,8 @@ class tabChart {
 }
 
 // Functions for page transitions/loading/sampling
-function loadingFormat() {
+function loadingFormat(text='Preparing new data!') {
+  $("#loading-page h2 span").text(text)
   $("#svg-plot").css("opacity",0.1)
   $("#loading-page").css("display","block")
 }
@@ -338,6 +383,7 @@ function loadingFormat() {
 function finishedFormat() {
   $("#svg-plot").css("opacity",1)
   $("#loading-page").css("display","none")
+  $("#loading-page h2 span").text('Preparing new data!')
 }
 
 function highlighting() {
@@ -468,6 +514,7 @@ class hexChart {
 
         hexParm.files = [`./datafiles/${hexParm.station}/${hexParm.station}-${hexParm.parms[0]}-filtered.csv`,
     `./datafiles/${hexParm.station}/${hexParm.station}-${hexParm.parms[1]}-filtered.csv`]
+
     }
 
     prepData() {
@@ -488,10 +535,10 @@ class hexChart {
                     // Dates before 1965 occasionally have duplicate entries...
                     // Needs to be fixed upstream
                     data1 = data1.filter(d => +d.val > -9998)
-                    data1 = data1.filter(d => d.date.slice(0,2) > 65)
+                    data1 = data1.filter(d => (d.date.slice(0,2) > 65) || ((d.date.slice(0,2) < 35)))
 
                     data2 = data2.filter(d => +d.val > -9998)
-                    data2 = data2.filter(d => d.date.slice(0,2) > 65)
+                    data2 = data2.filter(d => (d.date.slice(0,2) > 65) || ((d.date.slice(0,2) < 35)))
 
                     let dataMap = {};
 
@@ -528,7 +575,6 @@ class hexChart {
 
                 })
                 .catch(err => {
-                  // console.error(err);
                   reject();
                 });
 
@@ -584,7 +630,13 @@ class hexChart {
 
     async makePlot() {
 
+
         $('#hexLabel').html(`<b>All ${hexParm.station.toUpperCase()}</b> (Filtered)`)
+
+        // If we don't have any data to form hexbins, throw an error to reject promise
+        if (!Boolean(this.bins.length)) {
+          throw new Error('X and/or Y variables have no data to plot')
+        }
 
         let color = d3.scaleSequential(d3.interpolateBuPu)
                         .domain([0, d3.max(this.bins, d => d.length) / 1.25])
@@ -621,8 +673,6 @@ class hexChart {
                     .html(`<span><b>${d.length}</b> obs of <b>${this.data.length}</b> total
                         (<b>${(100*d.length/this.data.length).toFixed(2)}%</b>), 
                         centered on x: ${centerX}, y: ${centerY}</span>`);
-
-                //console.log(d);
                 
                 // formatting
                 d3.selectAll('.selBin').classed('selBin',false)
@@ -663,6 +713,7 @@ class hexChart {
           }
 
         } catch (err) {
+          console.log(err)
           console.log('00z ob is missing for hexbin plotting')
         }
 
@@ -677,8 +728,6 @@ class hexChart {
         } catch (err) {
           console.log('12z ob is missing for hexbin plotting')
         }
-
-        // hex_obs = [{x: xval_00,y: yval_00,t: '00z'}, {x: xval_12, y: yval_12, t: '12z'}]
         
         hexArea.selectAll("circle")
             .data(hex_obs)
@@ -744,9 +793,20 @@ function updateSoundParmUnit() { dm.soundParmUnit($('#sndparam option:selected')
 // Update the data in the DataManager in async fashion
 async function updateData(init=true) {
 
-  // Await the resolution of the promise in readData before continuing
-  await dm.readData(dm.fileName());
+  var goAhead = true;
 
+  // Await the resolution of the promise in readData before continuing
+  await dm.readData(dm.fileName())
+          .catch(() => {
+            goAhead = false;
+          });
+
+  if (!goAhead) {
+    console.log('No data to read for building charts.')
+    loadingFormat('Please select new site.');
+    return;
+  }
+  
   // Read current obs (**the data for current obs are old**)
   await dm.readObs();
   dm.formatObs();
@@ -775,6 +835,7 @@ async function updateData(init=true) {
     range.filter(null)
     timeSeries.filter(null)
     hist.filter(null)
+    yearHist.filter(null)
 
     dm.updateTSGroup();
 
@@ -794,6 +855,8 @@ async function updateData(init=true) {
   chart3.makeChart(range,dm.getDateIdxDim(),dm.getGroupByDateCount());
   chart4.makeChart(maxTab,dm.getbarDim(),dm.getUnit());
   chart5.makeChart(minTab,dm.getbarDim(),dm.getUnit(),false);
+  chart6.makeChart(yearHist,dm.getDateDim(),dm.getYearGroup())
+  // ** chart 6 //
 
   // Update the main header title
   chart.setTitle(dm.soundTime().toUpperCase() + " Soundings for " + dm.station()
@@ -812,6 +875,7 @@ async function refreshChart(type) {
 
   let rangeFilt = range.filter();
   let histFilt = hist.filter();
+  let yearHistFilt = yearHist.filter();
 
   // Decrease opacity of plots while new data is processing
   loadingFormat();
@@ -836,6 +900,7 @@ async function refreshChart(type) {
 
         // Clear any hist filters
         hist.filter(null);
+        yearHist.filter(null);
 
         // Update time series chart with original, unfiltered dimension / group
         dm.updateTSGroup();
@@ -845,6 +910,7 @@ async function refreshChart(type) {
 
         // Re-apply filter to hist chart
         hist.filter(histFilt);
+        yearHist.filter(yearHistFilt);
 
         // Redraw charts again
         dc.redrawAll();
@@ -861,6 +927,7 @@ async function refreshChart(type) {
         
         // Clear any hist filters
         hist.filter(null);
+        yearHist.filter(null);
 
         // Time series has to use a special function that utilizes temp crossfilters/dimensions
         dm.updateTSGroup();
@@ -870,6 +937,7 @@ async function refreshChart(type) {
 
         // Re-apply filter to hist chart
         hist.filter(histFilt);
+        yearHist.filter(yearHistFilt);
 
         // Redraw charts again
         dc.redrawAll();
@@ -892,12 +960,14 @@ async function refreshChart(type) {
 
       // Clear any filters
       hist.filter(null);
+      yearHist.filter(null);
       range.filter(null);
 
       // Logic in make chart will check the yaxis values entered
       dm.updateTSGroup();
 
       hist.filter(histFilt);
+      yearHist.filter(yearHistFilt);
       range.filter(rangeFilt);
 
       break;
@@ -921,9 +991,13 @@ async function updateHex(chart) {
   container.select('#hexDat span').text('Sampled Data (Click/Tap Bin for Counts)')
 
   chart.updateParms();
+
   await chart.prepData()
-              .then(() => {chart.updateFunctions().makePlot();})
+              .then(() => {
+                chart.updateFunctions().makePlot();
+              })
               .catch(err => {
+      
       $('#hexLabel').html(`Unable to construct chart for <b>${hexParm.station.toUpperCase()}</b>`)
       console.log('An error has occurred (likely a data file is missing). Cannot construct bivariate chart.')
     });
@@ -947,12 +1021,14 @@ $(window).ready(function() {
   chart3 = new rChart($("#obs-count").width())
   chart4 = new tabChart($("#max-table").width())
   chart5 = new tabChart($("#min-table").width())
+  chart6 = new ybChart($("#year-chart").width())
 
   timeSeries = new dc.CompositeChart('#line-chart')
   hist = new dc.BarChart('#bar-chart')
   range = new dc.BarChart('#obs-count')
   maxTab = new dc.DataTable('#max-table')
   minTab = new dc.DataTable('#min-table')
+  yearHist = new dc.BarChart('#year-chart')
 
   loadingFormat();
   updateFiltered();
