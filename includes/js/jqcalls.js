@@ -187,12 +187,10 @@ $("#showinfo").on("click", function() {
 
 // Map controls
 $('#map-container button').on("click", () => {
-  // $('#map-container').hide();
   $('#map-container').css('visibility','hidden');
 })
 
 $('#showMap').on("click", () => {
-  // $('#map-container').show();
   $('#map-container').css('visibility','visible');
 })
 

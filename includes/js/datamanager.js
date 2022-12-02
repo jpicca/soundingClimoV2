@@ -49,6 +49,7 @@ d3Edge.dataManager = function module() {
   };
 
   exports.fileName = function(stn, sndparm, filtered) {
+
     if (!arguments.length) return fileName;
     if (filtered || (filter0Fields.includes(sndparm))) {
       fileName = "./datafiles/" + stn + "/" + stn + "-" + sndparm + "-filtered.csv";
@@ -277,6 +278,7 @@ d3Edge.dataManager = function module() {
     // New dimensions for the bar chart and the time series/range charts
     barDim = fdata.dimension(d => d.val)
     dateIdxDim = fdata.dimension(d => d.idxDate)
+    dateDim = fdata.dimension(d => d3.timeYear(d.date).getFullYear())
 
     // Create an identical dimension to allow user to filter via sounding time radio button
     // Charts don't "listen" to their own dimension (to prevent weird actions)
@@ -290,6 +292,7 @@ d3Edge.dataManager = function module() {
     // New groups for the bar chart and the range chart
     barGroup = barDim.group(d => { return binwidth * Math.floor(d/binwidth)});
     groupByDateCount = dateIdxDim.group();
+    yearGroup = dateDim.group();
 
     // New group for the time series chart
     // Use the sound time to create the right index to get the proper entry from
@@ -483,11 +486,13 @@ d3Edge.dataManager = function module() {
   exports.getbarDim = function () { return barDim; };
   exports.getDateIdxDim = function () { return dateIdxDim; };
   exports.getZeroFilter = function () { return zeroFilterDim; }
+  exports.getDateDim = function () { return dateDim; }
 
   exports.getGroupByDay = function () { return groupByDay; };
   exports.getGroupByDayRange = function() { return groupByDayRange; };
   exports.getbarGroup = function () { return barGroup; };
   exports.getGroupByDateCount = function () { return groupByDateCount; };
+  exports.getYearGroup = function () { return yearGroup; };
 
   exports.getData = function() { return data; };
   exports.getRawData = function() { return raw_data; };
