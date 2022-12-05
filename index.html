@@ -445,17 +445,17 @@
           <ul class="navbar-nav mx-auto">
             <li class='nav-item py-1 px-lg-2'>
               <div class="optionbox" id="soundingtimes">
-                <span class="style5">Sounding Time</span>
+                <span class="style5">Time</span>
                 <br />
                 <input type="radio" name="sndtime" id="zero" value="00Z" />
-                <label for="zero">00Z&nbsp;&nbsp;</label>
+                <label for="zero">00Z</label>
                 <input type="radio" name="sndtime" id="twelve" value="12Z" />
-                <label for="twelve">12Z&nbsp;&nbsp;</label>
+                <label for="twelve">12Z</label>
                 <input type="radio" checked name="sndtime" id="both" value="all" />
-                <label for="both">All&nbsp;&nbsp;</label>
+                <label for="both">All</label>
               </div>
             </li>
-            <li class="nav-item py-1 pl-lg-3">
+            <li class="nav-item py-1 pl-lg-1">
               <div class="optionbox" id="stationselect">
                 <label class="style5" for="stn">Select Station</label>
                 <br />
@@ -588,12 +588,12 @@
                 </select>
               </div>
             </li>
-            <li class="nav-item py-1 pr-lg-3">
+            <li class="nav-item py-1 pr-lg-1">
               <div style='text-align: center;'>
                 <button id='showMap' class='btn btn-sm btn-link'>Map</button>
               </div>
             </li>
-            <li class="nav-item py-1 px-lg-3">
+            <li class="nav-item py-1 px-lg-1">
               <div class="optionbox" id="parameterselect">
                 <label class="style5" for="sndparam">Select Display Parameter</label>
                 <br />
@@ -705,22 +705,25 @@
                 </select>
               </div>
             </li>
-            <li class="nav-item py-1 px-lg-3">
+            <li class="nav-item py-1 px-lg-2">
               <div class="optionbox" id="raw-vs-filter">
-                <span class="style5">Raw vs Filtered Fields</span>
-                <br />
+                <!-- <span class="style5">Filter?</span> -->
+                <!-- <br /> -->
+                <!-- <div class="col-lg-12"> -->
                 <input type="radio" name="dtype" id="raw" value="raw" />
-                <label for="raw">Raw&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                <label for="raw">Raw</label>
+                <!-- </div> -->
+                <br />
                 <input type="radio" name="dtype" id="filtered" value="filtered" checked />
                 <label for="filtered">Filtered</label>
               </div>
             </li>
-            <li class="nav-item py-1 px-lg-3"> 
+            <li class="nav-item py-1 px-lg-1"> 
               <div style='text-align: center;'>
                 <button id='obsBtn' class='btn btn-sm btn-link'>Toggle Current Ob</button>
               </div>
             </li>
-            <li class="nav-item px-lg-3 my-auto">
+            <li class="nav-item px-lg-1 my-auto">
               <!-- Custom Plot Dropdown -->
               <div class="dropdown show optionbox">
                 <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-toggle="dropdown">
@@ -756,7 +759,7 @@
                 </div>
               </div>
             </li>
-            <li class="nav-item py-1 px-lg-3">
+            <li class="nav-item py-1 px-lg-1">
               <div style='text-align: center;'>
                 <button id='chartBtn' class='btn btn-sm btn-link'>Bivariate Chart</button>
               </div>
@@ -776,7 +779,7 @@
           </div>
           <div id='svg-plot' class='col-sm-12'>
             <div id='plot-holder' class='row'>
-              <div class ='col-lg-8'>
+              <div class='col-lg-8'>
                 <div id='svg-title' class='row'></div>
                 <div id='line-chart'>
 
@@ -793,7 +796,7 @@
                 <span id='sample-date' class='table-title'>Data Readout</span>
                 <div id='instruction'>&nbsp; (Click sampled date to lock data)</div>
               </div> 
-                <div id='table-holder' class='col-lg-12'>
+              <div id='table-holder' class='col-lg-12'>
 
                 <table id='chart-sample' class='table table-striped'>
                   <thead>
@@ -852,21 +855,27 @@
                   </div>
                 </div>
                 <hr />
-                <div class='row'>
+                <p id="por" class='table-title'>Period of Record<br /><span id="por-text"></span><br /></p>
+                
+              </div>
+
+            
+            </div>
+            <div class="col-lg-12" id="dist-div">
+              <div class='row'>
+                <div class='col-lg-6'>
                   <div class='table-title col-lg-12'>Parameter Distribution</div>
                   <div id='bar-chart' class='col-lg-12'>
 
                   </div>
                 </div>
                 <hr />
-                <div class='row'>
+                <div class='col-lg-6'>
                   <div class='table-title col-lg-12'>Annual Distribution</div>
                   <div id='year-chart' class='col-lg-12'>
 
                   </div>
                 </div>
-                <p id="por" class='table-title'>Period of Record<br /><span id="por-text"></span><br /></p>
-                
               </div>
             </div>
           </div>

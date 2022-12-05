@@ -70,7 +70,7 @@ class tsChart {
     }
 
     dcChart.width(this.width)
-      .height(height*0.65)
+      .height(height*0.55)
       .x(d3.scaleTime()
           .domain([new Date(2008, 0, 1, 0), new Date(2009, 0, 1, 12)]))
       .renderHorizontalGridLines(true)
@@ -196,7 +196,7 @@ class ybChart {
   makeChart(dcChart,dim,group) {
 
     dcChart.width(this.width)
-      .height(0.15*height)
+      .height(0.25*height)
       .margins(ybmargin)
       .mouseZoomable(false)
       .dimension(dim)
@@ -245,7 +245,7 @@ class bChart {
     let rangeVal = maxVal - minVal;
 
     dcChart.width(this.width)
-        .height(0.15*height)
+        .height(0.25*height)
         .margins(margin)
         .mouseZoomable(false)
         .dimension(dim)
@@ -346,6 +346,17 @@ class tabChart {
     // If we're listing min values, filter the missing vals (-9999s)
     if (top == false) {
       dim.filter(d => { return d > -9999})
+    }
+
+    if (window.innerHeight > 650) {
+
+      let toAdd = Math.round((window.innerHeight - 650) / 50)
+
+      if (toAdd > 5) {
+        toAdd = 5
+      }
+
+      $('#n_vals').val(5 + toAdd)
     }
 
     dcChart.width(this.width)
